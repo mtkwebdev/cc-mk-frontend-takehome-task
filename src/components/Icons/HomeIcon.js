@@ -1,6 +1,6 @@
 import { React, memo } from "react";
 import PropTypes from "prop-types";
-import BaseSVG from "../../common/BaseSVG";
+import BaseSVG from "../common/BaseSVG";
 
 const HomeIcon = memo(({ ...props }) => {
   return (

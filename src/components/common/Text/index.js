@@ -7,7 +7,7 @@ const Text = ({ as, ...otherProps }) => {
 };
 
 Text.propTypes = {
-  type: PropTypes.string.isRequired,
+  as: PropTypes.string.isRequired,
   isSubdued: PropTypes.bool,
 };
 
