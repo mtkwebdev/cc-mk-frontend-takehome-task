@@ -3,7 +3,6 @@ import * as S from "./styles";
 
 const Text = ({ as, ...otherProps }) => {
   const Component = S[as];
-  console.log(Component);
   return <Component {...otherProps} />;
 };
 
