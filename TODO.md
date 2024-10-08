@@ -1,0 +1,52 @@
+## To do:
+
+> Note: todo's not in specific order, but categorised as tasks that need to be completed.
+
+#### Initial tasks
+
+- [x] Create a new repo for technical test
+- [x] Break design down into component tasks
+- [ ] Find Style guide and create styles.css and set css variables.
+- [ ] Upgrade react mounting
+- [ ] Replace moment with dayjs
+- [ ] Assess and plan if a redux store is needed, and also plan store out
+
+#### Write Tests
+
+- [ ] Write tests for each component
+- [ ] Write unit tests for Redux store
+
+#### Create Components Tasks
+
+##### Layout Components:
+
+- [ ] BaseLayout
+- [ ] HeaderComponent
+- [ ] SidePanel
+- [ ] Footer
+
+##### Features Components:
+
+- [ ] AccountDetails [firstName, lastName]
+- [ ] AccountName [firstName, lastName]
+- [ ] AccountIcon [firstName, lastName]
+- [ ] SearchResultsList [listData]
+- [ ] SearchResultsListItem [date, heading, description, details]
+- [ ] Pagination [buttonRange]
+- [ ] PaginationArrowButtons
+- [ ] BrandLogo [isFullLogo, size]
+
+##### Common Components:
+
+- [ ] SVGWrapper
+- [ ] InputField [type]
+- [ ] DropDownList [isMultiSelect]
+- [ ] DropDownListItem [option]
+- [ ] DropdownDateSelector???
+- [ ] NavigationList [isIconList]
+- [ ] NavigationListItem [iconSrc]
+- [ ] Heading [text]
+- [ ] Subheading [text]
+- [ ] SmallText
+- [ ] AutoGrid [rows, columns]
+- [ ] AutoGridItem
