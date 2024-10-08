@@ -6,7 +6,7 @@ const BaseLayout = ({ children }) => {
   return (
     <>
       <S.BaseLayoutContainer id="base-layout">
-        <SidePanel>SidePanel</SidePanel>
+        <SidePanel />
         {children}
       </S.BaseLayoutContainer>
       <Footer>Footer</Footer>
