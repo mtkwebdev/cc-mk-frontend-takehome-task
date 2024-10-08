@@ -6,9 +6,9 @@
 
 - [x] Create a new repo for technical test
 - [x] Break design down into component tasks
-- [ ] Find Style guide and create styles.css and set css variables.
-- [ ] Upgrade react mounting
-- [ ] Replace moment with dayjs
+- [x] Find Style guide and create styles.css and set css variables.
+- [x] Upgrade react mounting
+- [x] Replace moment with dayjs
 - [ ] Assess and plan if a redux store is needed, and also plan store out
 - [ ] Create BrowserRouter and upgrade react-router-dom to v6?
 - [ ] Eject CRA and migrate to vite?
