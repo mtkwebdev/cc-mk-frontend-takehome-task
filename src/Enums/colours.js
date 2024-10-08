@@ -39,8 +39,7 @@ export const COLOURS = Object.freeze({
   },
   actions: {
     primary: {
-      // default: "#26C281",
-      default: "blue",
+      default: "#26C281",
       hover: "#00A760",
       pressed: "#008347",
       disabled: "#E4F6ED",
