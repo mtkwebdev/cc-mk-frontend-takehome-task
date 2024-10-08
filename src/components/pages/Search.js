@@ -1,11 +1,14 @@
+import BaseLayout from "../layout/BaseLayout";
 import SearchEngine from "../features/SearchEngine";
 import DashboardLayout from "../layout/DashboardLayout";
 
 const SearchPage = () => {
   return (
-    <DashboardLayout>
-      <SearchEngine />
-    </DashboardLayout>
+    <BaseLayout>
+      <DashboardLayout>
+        <SearchEngine />
+      </DashboardLayout>
+    </BaseLayout>
   );
 };
 

@@ -23,7 +23,7 @@
 ##### Layout Components:
 
 - [ ] BaseLayout
-- [ ] HeaderComponent
+- [ ] DashboardLayout
 - [ ] SidePanel
 - [ ] Footer
 
