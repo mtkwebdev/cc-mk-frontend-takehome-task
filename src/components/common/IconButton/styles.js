@@ -3,10 +3,6 @@ import styled from "styled-components";
 import { COLOURS } from "../../../enums/colours.js";
 
 export const IconButton = styled.button`
-  display: flex;
-  margin: auto;
-  align-items: center;
-  justify-content: center;
   background: none;
   color: inherit;
   border: none;
@@ -14,7 +10,9 @@ export const IconButton = styled.button`
   font: inherit;
   cursor: pointer;
   outline: inherit;
-
+  width: min-content;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
   background-colour: ${p => COLOURS.actions[p.variant]?.default};
 
   &:hover {
