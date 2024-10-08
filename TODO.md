@@ -10,6 +10,8 @@
 - [ ] Upgrade react mounting
 - [ ] Replace moment with dayjs
 - [ ] Assess and plan if a redux store is needed, and also plan store out
+- [ ] Create BrowserRouter and upgrade react-router-dom to v6?
+- [ ] Eject CRA and migrate to vite?
 
 #### Write Tests
 
