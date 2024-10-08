@@ -1,0 +1,29 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+  /* Base colours */
+  --colour-surface: #ffffff;
+  --colour-on-surface: #0F1310;
+  --colour-primary: #26c281;
+  --colour-secondary:#CFD0CF;
+    /* colours */
+  --colour-surface-success-default: #BDE9D2;
+  --colour-surface-success-subdued: #e4f6ed;
+  --colour-decorative-surface-one: #9EC59B
+  /* footer colour */
+  --colour-decorative-surface-five: #F7FCFA;
+  /* text colours */
+  --text-success: #008347;
+  --text-default: #0F1310
+  --text-subdued: #6F7170
+  --text-disabled: #CFD0CF
+}
+
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+  font-optical-sizing: auto;
+  font-style: normal;
+}
