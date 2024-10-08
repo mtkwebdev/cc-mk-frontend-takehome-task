@@ -22,7 +22,7 @@
 
 ##### Layout Components:
 
-- [ ] BaseLayout
+- [x] BaseLayout
 - [ ] DashboardLayout
 - [ ] SidePanel
 - [ ] Footer
@@ -40,7 +40,7 @@
 
 ##### Common Components:
 
-- [ ] SVGWrapper
+- [x] BaseSVG
 - [ ] InputField [type]
 - [ ] DropDownList [isMultiSelect]
 - [ ] DropDownListItem [option]
@@ -52,3 +52,14 @@
 - [ ] SmallText
 - [ ] AutoGrid [rows, columns]
 - [ ] AutoGridItem
+
+#### Icons from figma as SVG's
+
+- [x] ChevronIcon
+- [x] CogIcon
+- [x] ContactsIcon
+- [x] HelpIcon
+- [x] HomeIcon
+- [x] NewFileIcon
+- [x] SearchIcon
+- [x] SuitcaseIcon

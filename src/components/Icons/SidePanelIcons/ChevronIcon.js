@@ -1,18 +1,17 @@
 import { React, memo } from "react";
 import PropTypes from "prop-types";
-import SVGWrapper from "../../common/SVGWrapper";
+import BaseSVG from "../../common/BaseSVG";
 
-const ChevronIcon = memo(({ width, height, colour }) => {
+const ChevronIcon = memo(({ ...props }) => {
   return (
-    <SVGWrapper width={width} height={height}>
+    <BaseSVG {...props}>
       <path
         d="M11.6667 17.6667L16 13.0001L20.3334 17.6667"
-        colour={colour}
         strokeWidth="2"
         strokeLinecap="round"
         strokeLinejoin="round"
       />
-    </SVGWrapper>
+    </BaseSVG>
   );
 });
 
@@ -20,7 +19,7 @@ const ChevronIcon = memo(({ width, height, colour }) => {
 ChevronIcon.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
-  colour: PropTypes.string.isRequired,
+  variant: PropTypes.string.isRequired,
 };
 
 export default ChevronIcon;

@@ -1,4 +1,4 @@
-const colours = {
+export const COLOURS = Object.freeze({
   base: {
     surface: "#FFFFFF",
     onSurface: "#0F1310",
@@ -20,14 +20,12 @@ const colours = {
     highlight: "#2653C2",
     critical: "#CF2D2D",
   },
-  text: {
-    default: "#0F1310",
-    subdued: "#6F7170",
-    disabled: "#CFD0CF",
-    success: "#008347",
-    warning: "#F9A825",
-    highlight: "#2653C2",
-    critical: "#CF2D2D",
+  sidePanel: {
+    success: {
+      default: "#BDE9D2",
+      pressed: "#26C281",
+      disabled: "#E4F6ED",
+    },
   },
   borders: {
     default: "#8C9196",
@@ -39,11 +37,34 @@ const colours = {
       subdued: "#BDE9D2",
     },
   },
+  actions: {
+    primary: {
+      // default: "#26C281",
+      default: "blue",
+      hover: "#00A760",
+      pressed: "#008347",
+      disabled: "#E4F6ED",
+    },
+    secondary: {
+      default: "#FFFFFF",
+      hover: "#E4F6ED",
+      pressed: "#BDE9D2",
+      disabled: "#FFFFFF",
+    },
+  },
+  text: {
+    default: "#0F1310",
+    subdued: "#6F7170",
+    disabled: "#CFD0CF",
+    success: "#008347",
+    warning: "#F9A825",
+    highlight: "#2653C2",
+    critical: "#CF2D2D",
+  },
+
   decorative: {
     surface: {
       one: "#9EC59B",
     },
   },
-};
-
-export const COLOURS = Object.freeze(colours);
+});
