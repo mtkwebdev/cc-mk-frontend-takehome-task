@@ -1,19 +1,23 @@
 import { useEffect, useState } from "react";
 import { getSearchData } from "../../../services";
 import * as S from "./styles";
+import Text from "../../common/Text";
+import SearchEngineFilters from "./SearchEngineFilters";
 
 const SearchEngine = () => {
-  const [data, setData] = useState([]);
+  return (
+    <S.SearchEngine>
+      <Text className="header-area" as={"TextXl"}>
+        AI-Powered Regulatory Search
+      </Text>
 
-  useEffect(() => {
-    getPageData();
-  }, []);
+      <Text className="subheader-area" as={"TextSm"} isSubdued={true}>
+        Use the search engine to search for publications from courts and regulators.
+      </Text>
 
-  const getPageData = () => {
-    setData(getSearchData());
-  };
-
-  return <S.SearchEngine>Search Engine Implementation</S.SearchEngine>;
+      <SearchEngineFilters />
+    </S.SearchEngine>
+  );
 };
 
 export default SearchEngine;
