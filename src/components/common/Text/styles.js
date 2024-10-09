@@ -58,7 +58,7 @@ export const Heading = styled.h5`
   line-height: ${lineHeader};
   color: ${p => getFontColour(p)};
 `;
-export const SubHeading = styled.h6`
+export const Subheading = styled.h6`
   font-weight: ${semibold};
   font-size: ${textSubheader};
   line-height: ${lineSubheader};

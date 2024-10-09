@@ -4,6 +4,8 @@ import * as S from "./styles";
 import Text from "../../common/Text";
 import SearchEngineFilters from "./SearchEngineFilters";
 
+import SearchEngineResults from "./SearchEngineResults";
+
 const SearchEngine = () => {
   return (
     <S.SearchEngine>
@@ -16,6 +18,7 @@ const SearchEngine = () => {
       </Text>
 
       <SearchEngineFilters />
+      <SearchEngineResults />
     </S.SearchEngine>
   );
 };
