@@ -19,7 +19,7 @@ const ChevronIcon = memo(({ ...props }) => {
 ChevronIcon.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
-  variant: PropTypes.string.isRequired,
+  variant: PropTypes.object.isRequired,
 };
 
 export default ChevronIcon;

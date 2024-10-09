@@ -23,6 +23,7 @@ export const COLOURS = Object.freeze({
   sidePanel: {
     success: {
       default: "#BDE9D2",
+      hover: "#BDE9D2",
       pressed: "#26C281",
       disabled: "#E4F6ED",
     },
