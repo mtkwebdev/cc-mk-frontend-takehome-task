@@ -1,10 +1,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import * as S from "./styles.js";
-import Button from "../Button";
-import InputContainer from "../InputContainer";
+import Button from "../BaseButton/index.js";
+import InputContainer from "../InputContainer/index.js";
 import Text from "../Text/index.js";
-import ChevronIcon from "../../icons/ChevronIcon";
+import ChevronIcon from "../../icons/ChevronIcon.js";
 import { COLOURS } from "../../../enums/colours.js";
 
 const subduedText = {
@@ -23,7 +23,7 @@ const inputButtonVariant = {
   hover: "transparent",
 };
 
-const InputDropdown = ({ placeholder, options, ...otherProps }) => {
+const Dropdown = ({ placeholder, options, ...otherProps }) => {
   const [openDropdownList, setOpenDropdownList] = useState(false);
   const [selectedValue, setSelectedValue] = useState({ text: placeholder, value: null });
 
@@ -71,7 +71,7 @@ const InputDropdown = ({ placeholder, options, ...otherProps }) => {
   );
 };
 
-InputDropdown.propType = {
+Dropdown.propType = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
@@ -80,4 +80,4 @@ InputDropdown.propType = {
   ),
 };
 
-export default InputDropdown;
+export default Dropdown;
