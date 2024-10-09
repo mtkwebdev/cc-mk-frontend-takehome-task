@@ -20,11 +20,11 @@ const defaultText = {
 };
 
 const inputButtonVariant = {
-  default: "transparent",
-  hover: "transparent",
+  default: COLOURS.surface.default,
+  hover: COLOURS.surface.default,
 };
 
-const InputDropdown = ({ placeholder, options, ...otherProps }) => {
+const Dropdown = ({ placeholder, options, ...otherProps }) => {
   const [openDropdownList, setOpenDropdownList] = useState(false);
   const [selectedValue, setSelectedValue] = useState({ text: placeholder, value: null });
 
@@ -53,26 +53,29 @@ const InputDropdown = ({ placeholder, options, ...otherProps }) => {
         </S.ChevronIconContainer>
       </InputContainer>
 
-      <S.DropdownOptions>
-        {openDropdownList &&
-          options.map(({ text }) => (
-            <Button
-              type="button"
-              key={text.replace(" ", "")}
-              onClick={handleSelect}
-              variant={inputButtonVariant}
-              textColour={defaultText}
-              isFullWidth={true}
-              isOption={true}>
-              <Text as="TextBody">{text}</Text>
-            </Button>
-          ))}
-      </S.DropdownOptions>
+      <S.DropdownOptionsContainer>
+        {openDropdownList && (
+          <S.DropdownOptions>
+            {options.map(({ text }) => (
+              <Button
+                type="button"
+                key={text.replace(" ", "")}
+                onClick={handleSelect}
+                variant={inputButtonVariant}
+                textColour={defaultText}
+                isFullWidth={true}
+                isOption={true}>
+                <Text as="TextBody">{text}</Text>
+              </Button>
+            ))}
+          </S.DropdownOptions>
+        )}
+      </S.DropdownOptionsContainer>
     </div>
   );
 };
 
-InputDropdown.propType = {
+Dropdown.propType = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
@@ -81,4 +84,4 @@ InputDropdown.propType = {
   ),
 };
 
-export default InputDropdown;
+export default Dropdown;

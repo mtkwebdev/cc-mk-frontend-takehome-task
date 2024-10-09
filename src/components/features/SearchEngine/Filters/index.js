@@ -1,6 +1,6 @@
 import * as S from "./styles";
 import InputField from "../../../common/InputFIeld";
-import Dropdown from "../../../common/InputDropdown";
+import Dropdown from "../../../common/Dropdown";
 import Button from "../../../common/Button";
 import { COLOURS } from "../../../../enums/colours";
 
