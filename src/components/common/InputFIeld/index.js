@@ -1,13 +1,20 @@
 import * as S from "./styles";
+import InputFIeldContainer from "../InputContainer";
+import SearchIcon from "../../icons/SearchIcon";
 
-const InputField = ({ label, children, type, ...props }) => {
+import { COLOURS } from "../../../enums/colours";
+
+const subduedIcon = {
+  default: COLOURS.text.subdued,
+  hover: COLOURS.text.subdued,
+};
+
+const InputField = ({ placeholder, type, ...props }) => {
   return (
-    <div style={{ display: "flex", flexDirection: "column" }}>
-      <S.InputFIeldContainer>
-        <S.InputFIeld {...props} placeholder={label} />
-        {children}
-      </S.InputFIeldContainer>
-    </div>
+    <InputFIeldContainer>
+      <SearchIcon size="sm" variant={subduedIcon} />
+      <S.InputFIeld {...props} placeholder={placeholder} />
+    </InputFIeldContainer>
   );
 };
 

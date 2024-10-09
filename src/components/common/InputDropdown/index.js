@@ -1,7 +1,7 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import * as S from "./styles.js";
-import Button from "../BaseButton/index.js";
+import Button from "../Button/index.js";
 import InputContainer from "../InputContainer/index.js";
 import Text from "../Text/index.js";
 import ChevronIcon from "../../icons/ChevronIcon.js";
