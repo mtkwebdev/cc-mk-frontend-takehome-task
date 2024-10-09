@@ -30,10 +30,12 @@ export const DropdownOptionsContainer = styled.div`
 export const DropdownOptions = styled.div`
   position: absolute;
   width: 100%;
+  height: 16rem;
+  overflow-x: auto;
   display: flex;
   flex-direction: column;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px;
-  border-radius: 0.5rem;
+  border-radius: 0rem 0rem 0.5rem 0.5rem;
   z-index: 50;
 
   & button:hover,

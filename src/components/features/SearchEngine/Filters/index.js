@@ -4,6 +4,13 @@ import Dropdown from "../../../common/Dropdown";
 import Button from "../../../common/Button";
 import { COLOURS } from "../../../../enums/colours";
 
+import { getCategories, getDecisions, getCompanies, getDates } from "../../../../services/index.js";
+
+const categories = getCategories();
+const decisions = getDecisions();
+const companies = getCompanies();
+const dates = getDates();
+
 const primaryButton = {
   default: COLOURS.actions.primary.default,
   hover: COLOURS.actions.primary.hover,
@@ -40,10 +47,10 @@ const SearchEngineFilters = () => {
         </Button>
       </S.SearchBarFilter>
       <S.DropDownFilters>
-        <Dropdown className="category-area" placeholder="Category" options={mockOptions} />
-        <Dropdown className="decision-area" placeholder="Decision" options={mockOptions} />
-        <Dropdown className="company-area" placeholder="Company" options={mockOptions} />
-        <Dropdown className="date-area" placeholder="Date" options={mockOptions} />
+        <Dropdown className="category-area" placeholder="Category" options={categories} />
+        <Dropdown className="decision-area" placeholder="Decision" options={decisions} />
+        <Dropdown className="company-area" placeholder="Company" options={companies} />
+        <Dropdown className="date-area" placeholder="Date" options={dates} />
       </S.DropDownFilters>
     </S.SearchEngineFilters>
   );

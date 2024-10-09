@@ -1,14 +1,11 @@
-import dayjs from "dayjs";
-import { getSearchData } from "../../../../services";
-import Text from "../../../common/Text";
 import * as S from "./styles";
+import Text from "../../../common/Text";
+import { getSearchData } from "../../../../services";
+import { formatDate } from "../../../../utils/formatting";
 
 const data = getSearchData();
 console.log(data);
 const SearchEngineResultsItem = () => {
-  const formatDate = date => {
-    return dayjs(date).format("MMM DD YYYY");
-  };
   return (
     <div style={{ marginTop: "5rem", overflowX: "auto", height: "50vh" }}>
       {data.map(({ id, date, title, content, category, decision, company }) => (
