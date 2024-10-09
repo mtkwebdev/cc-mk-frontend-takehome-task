@@ -1,4 +1,3 @@
-import { Children } from "react";
 import * as S from "./styles";
 
 const InputField = ({ label, children, type, ...props }) => {
@@ -7,7 +6,6 @@ const InputField = ({ label, children, type, ...props }) => {
       <S.InputFIeldContainer>
         <S.InputFIeld {...props} placeholder={label} />
         {children}
-        <div>^</div>
       </S.InputFIeldContainer>
     </div>
   );
