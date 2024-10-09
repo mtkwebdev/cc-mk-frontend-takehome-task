@@ -27,21 +27,24 @@ const SearchEngineFilters = () => {
 
   return (
     <S.SearchEngineFilters>
-      <InputField className="search-area" placeholder="Search" type="search" label="search" />
-      <Button
-        type="button"
-        className="search-button-area"
-        variant={primaryButton}
-        textColour={secondaryText}
-        size="lg"
-        isFullWidth={true}>
-        Search
-      </Button>
-
-      <Dropdown className="category-area" placeholder="Category" options={mockOptions} />
-      <Dropdown className="decision-area" placeholder="Decision" options={mockOptions} />
-      <Dropdown className="company-area" placeholder="Company" options={mockOptions} />
-      <Dropdown className="date-area" placeholder="Date" options={mockOptions} />
+      <S.SearchBarFilter>
+        <InputField className="search-area" placeholder="Search" type="search" label="search" isSearchInput={true} />
+        <Button
+          type="button"
+          className="search-button-area"
+          variant={primaryButton}
+          textColour={secondaryText}
+          size="lg"
+          isSearchBtn={true}>
+          Search
+        </Button>
+      </S.SearchBarFilter>
+      <S.DropDownFilters>
+        <Dropdown className="category-area" placeholder="Category" options={mockOptions} />
+        <Dropdown className="decision-area" placeholder="Decision" options={mockOptions} />
+        <Dropdown className="company-area" placeholder="Company" options={mockOptions} />
+        <Dropdown className="date-area" placeholder="Date" options={mockOptions} />
+      </S.DropDownFilters>
     </S.SearchEngineFilters>
   );
 };
