@@ -27,7 +27,7 @@ const SearchEngineFilters = () => {
 
   return (
     <S.SearchEngineFilters>
-      <InputField className="search-area" placeholder="Search" type="search" />
+      <InputField className="search-area" placeholder="Search" type="search" label="search" />
       <Button
         type="button"
         className="search-button-area"

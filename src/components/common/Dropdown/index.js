@@ -18,6 +18,7 @@ const defaultText = {
   pressed: COLOURS.text.default,
   hover: COLOURS.text.default,
 };
+
 const inputButtonVariant = {
   default: "transparent",
   hover: "transparent",
