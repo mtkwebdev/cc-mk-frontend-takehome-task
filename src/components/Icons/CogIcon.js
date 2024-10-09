@@ -23,8 +23,7 @@ const CogIcon = memo(({ ...props }) => {
 
 // Prop validators
 CogIcon.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
+  size: PropTypes.string,
   variant: PropTypes.object.isRequired,
 };
 

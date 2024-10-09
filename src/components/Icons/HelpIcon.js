@@ -29,8 +29,7 @@ const HelpIcon = memo(({ ...props }) => {
 
 // Prop validators
 HelpIcon.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
+  size: PropTypes.string,
   variant: PropTypes.object.isRequired,
 };
 

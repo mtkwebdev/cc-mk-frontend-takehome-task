@@ -17,8 +17,7 @@ const ContactsIcon = memo(({ ...props }) => {
 
 // Prop validators
 ContactsIcon.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
+  size: PropTypes.string,
   variant: PropTypes.object.isRequired,
 };
 
