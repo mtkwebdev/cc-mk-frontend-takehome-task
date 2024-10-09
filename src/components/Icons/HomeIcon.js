@@ -25,7 +25,7 @@ const HomeIcon = memo(({ ...props }) => {
 HomeIcon.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
-  variant: PropTypes.string.isRequired,
+  variant: PropTypes.object.isRequired,
 };
 
 export default HomeIcon;

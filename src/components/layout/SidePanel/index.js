@@ -1,8 +1,24 @@
 import * as S from "./styles.js";
 import IconButton from "../../common/IconButton";
-import * as Icons from "../../Icons/SidePanelIcons";
+import * as Icons from "../../icons/SidePanelIcons";
+
+import { COLOURS } from "../../../enums/colours.js";
 
 const SidePanel = () => {
+  const iconButtonColours = {
+    default: COLOURS.actions.secondary.default,
+    hover: COLOURS.actions.secondary.hover,
+    pressed: COLOURS.actions.secondary.pressed,
+    disabled: COLOURS.actions.secondary.disabled,
+  };
+
+  const sidePanelIconColours = {
+    default: COLOURS.sidePanel.success?.default,
+    hover: COLOURS.sidePanel.success?.hover,
+    pressed: COLOURS.sidePanel.success?.pressed,
+    disabled: COLOURS.sidePanel.success?.disabled,
+  };
+
   const courtCorrectLogoIcon = process.env.PUBLIC_URL + "/icon.png";
 
   const SidePanelIcons = [
@@ -23,8 +39,8 @@ const SidePanel = () => {
           {SidePanelIcons.map(({ name }) => {
             const IconComponent = Icons[name];
             return (
-              <IconButton variant="primary" key={name}>
-                <IconComponent variantType="sidePanel" variant="success" />
+              <IconButton variant={iconButtonColours} key={name}>
+                <IconComponent variant={sidePanelIconColours} />
               </IconButton>
             );
           })}

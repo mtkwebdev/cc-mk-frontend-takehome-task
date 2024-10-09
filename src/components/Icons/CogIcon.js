@@ -25,7 +25,7 @@ const CogIcon = memo(({ ...props }) => {
 CogIcon.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
-  variant: PropTypes.string.isRequired,
+  variant: PropTypes.object.isRequired,
 };
 
 export default CogIcon;

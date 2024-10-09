@@ -1,7 +1,5 @@
 import styled from "styled-components";
 
-import { COLOURS } from "../../../enums/colours.js";
-
 export const IconButton = styled.button`
   background: none;
   color: inherit;
@@ -13,17 +11,17 @@ export const IconButton = styled.button`
   width: min-content;
   padding: 0.5rem;
   border-radius: 0.5rem;
-  background-colour: ${p => COLOURS.actions[p.variant]?.default};
+  background-color: ${p => p.variant.default || "inherit"};
+
+  &:focus {
+    background-color: ${p => p.variant.pressed || "inherit"};
+  }
 
   &:hover {
-    background-colour: ${p => COLOURS.actions[p.variant]?.hover};
+    background-color: ${p => p.variant.hover || "inherit"};
   }
 
-  &.pressed {
-    background-colour: ${p => COLOURS.actions[p.variant]?.pressed};
-  }
-
-  &.disabled {
-    background-colour: ${p => COLOURS.actions[p.variant]?.disabled};
+  &:disabled {
+    background-color: ${p => p.variant.disabled || "inherit"};
   }
 `;

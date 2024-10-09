@@ -53,7 +53,7 @@
 - [ ] AutoGrid [rows, columns]
 - [ ] AutoGridItem
 
-#### Icons from figma as SVG's
+#### icons from figma as SVG's
 
 - [x] ChevronIcon
 - [x] CogIcon

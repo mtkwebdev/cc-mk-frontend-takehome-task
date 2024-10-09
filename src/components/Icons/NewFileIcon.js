@@ -22,7 +22,7 @@ const NewFileIcon = memo(({ ...props }) => {
 NewFileIcon.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
-  variant: PropTypes.string.isRequired,
+  variant: PropTypes.object.isRequired,
 };
 
 export default NewFileIcon;

@@ -10,6 +10,7 @@ const BaseSVG = memo(({ width = 32, height = 32, children, ...otherProps }) => {
       height={height}
       viewBox={`0 0 ${width} ${height}`}
       fill="none"
+      focusable="true"
       xmlns="http://www.w3.org/2000/svg"
       {...otherProps}>
       {children}
@@ -22,8 +23,7 @@ BaseSVG.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
   children: PropTypes.node,
-  variantType: PropTypes.string,
-  variant: PropTypes.string,
+  variant: PropTypes.object.isRequired,
 };
 
 export default BaseSVG;

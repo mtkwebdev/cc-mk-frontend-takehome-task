@@ -1,16 +1,18 @@
 import styled from "styled-components";
-import { COLOURS } from "../../../enums/colours.js";
 
 export const BaseSVG = styled.svg`
+  &:focus {
+    stroke: ${p => p.variant.pressed};
+  }
   path {
-    stroke: ${p => COLOURS[p.variantType][p.variant]?.default};
+    stroke: ${p => p.variant.default};
 
-    &.pressed {
-      stroke: ${p => COLOURS[p.variantType][p.variant]?.pressed};
+    &:hover {
+      stroke: ${p => p.variant.hover};
     }
 
-    &.disabled {
-      stroke: ${p => COLOURS[p.variantType][p.variant]?.disabled};
+    &:disabled {
+      stroke: ${p => p.variant.disabled};
     }
   }
 `;

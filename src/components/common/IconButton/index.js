@@ -7,7 +7,7 @@ const IconButton = memo(({ children, ...props }) => {
 });
 
 IconButton.propTypes = {
-  variant: PropTypes.string.isRequired,
+  variant: PropTypes.object.isRequired,
 };
 
 export default IconButton;

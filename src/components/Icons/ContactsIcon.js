@@ -19,7 +19,7 @@ const ContactsIcon = memo(({ ...props }) => {
 ContactsIcon.propTypes = {
   width: PropTypes.number,
   height: PropTypes.number,
-  variant: PropTypes.string.isRequired,
+  variant: PropTypes.object.isRequired,
 };
 
 export default ContactsIcon;
