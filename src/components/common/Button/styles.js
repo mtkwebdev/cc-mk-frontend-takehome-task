@@ -2,6 +2,7 @@ import styled from "styled-components";
 import { medium, textButton, lineButton } from "../../../enums/textStyles.js";
 
 const getButtonPadding = p => {
+  if (p.isLink) return "0rem";
   switch (p.size) {
     case "lg":
       return "1rem 1.5rem";

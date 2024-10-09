@@ -24,7 +24,7 @@ import {
 const { text } = COLOURS;
 
 const getFontColour = p => {
-  if (p.variant) return "inherit";
+  if (p.type === "button") return "inherit";
   return p.isSubdued ? text.subdued : text.default;
 };
 
@@ -57,12 +57,14 @@ export const Heading = styled.h5`
   font-size: ${textHeader};
   line-height: ${lineHeader};
   color: ${p => getFontColour(p)};
+  margin: 0;
 `;
 export const Subheading = styled.h6`
   font-weight: ${semibold};
   font-size: ${textSubheader};
   line-height: ${lineSubheader};
   color: ${p => getFontColour(p)};
+  margin: 0;
 `;
 
 export const TextButton = styled.span`

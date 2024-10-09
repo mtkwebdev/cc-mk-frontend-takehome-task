@@ -9,7 +9,7 @@ const BaseLayout = ({ children }) => {
         <SidePanel />
         {children}
       </S.BaseLayoutContainer>
-      <Footer>Footer</Footer>
+      {/* <Footer>Footer</Footer> */}
     </>
   );
 };

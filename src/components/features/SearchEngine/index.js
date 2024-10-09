@@ -2,9 +2,9 @@ import { useEffect, useState } from "react";
 import { getSearchData } from "../../../services";
 import * as S from "./styles";
 import Text from "../../common/Text";
-import SearchEngineFilters from "./SearchEngineFilters";
+import SearchEngineFilters from "./Filters";
 
-import SearchEngineResults from "./SearchEngineResults";
+import SearchEngineResults from "./Results";
 
 const SearchEngine = () => {
   return (
