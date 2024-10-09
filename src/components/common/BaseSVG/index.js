@@ -3,12 +3,21 @@ import PropTypes from "prop-types";
 
 import * as S from "./styles";
 
-const BaseSVG = memo(({ width = 32, height = 32, children, ...otherProps }) => {
+const iconSize = {
+  xxl: "5rem",
+  xl: "4rem",
+  lg: "2.5rem",
+  md: "2rem",
+  sm: "1.5rem",
+  xs: "1.25rem",
+};
+
+const BaseSVG = memo(({ size, children, ...otherProps }) => {
   return (
     <S.BaseSVG
-      width={width}
-      height={height}
-      viewBox={`0 0 ${width} ${height}`}
+      width={iconSize[size]}
+      height={iconSize[size]}
+      viewBox={`0 0 32 32`}
       fill="none"
       focusable="true"
       xmlns="http://www.w3.org/2000/svg"
@@ -20,8 +29,7 @@ const BaseSVG = memo(({ width = 32, height = 32, children, ...otherProps }) => {
 
 // Prop validators
 BaseSVG.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
+  size: PropTypes.string,
   children: PropTypes.node,
   variant: PropTypes.object.isRequired,
 };

@@ -40,7 +40,7 @@ const SidePanel = () => {
             const IconComponent = Icons[name];
             return (
               <IconButton variant={iconButtonColours} key={name}>
-                <IconComponent variant={sidePanelIconColours} />
+                <IconComponent variant={sidePanelIconColours} size="md" />
               </IconButton>
             );
           })}

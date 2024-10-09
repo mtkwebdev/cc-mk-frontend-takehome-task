@@ -26,8 +26,7 @@ const SuitcaseIcon = memo(({ ...props }) => {
 
 // Prop validators
 SuitcaseIcon.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
+  size: PropTypes.string,
   variant: PropTypes.object.isRequired,
 };
 

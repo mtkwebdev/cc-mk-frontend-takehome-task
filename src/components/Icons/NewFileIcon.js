@@ -20,8 +20,7 @@ const NewFileIcon = memo(({ ...props }) => {
 
 // Prop validators
 NewFileIcon.propTypes = {
-  width: PropTypes.number,
-  height: PropTypes.number,
+  size: PropTypes.string,
   variant: PropTypes.object.isRequired,
 };
 
