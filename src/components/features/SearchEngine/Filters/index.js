@@ -24,14 +24,6 @@ const secondaryText = {
 };
 
 const SearchEngineFilters = () => {
-  const mockOptions = [
-    { text: "One", value: 1 },
-    { text: "Two", value: 2 },
-    { text: "Three", value: 3 },
-    { text: "Four", value: 4 },
-    { text: "Five", value: 5 },
-  ];
-
   return (
     <S.SearchEngineFilters>
       <S.SearchBarFilter>
