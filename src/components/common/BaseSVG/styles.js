@@ -1,18 +1,19 @@
 import styled from "styled-components";
 
 export const BaseSVG = styled.svg`
-  &:focus {
-    stroke: ${p => p.variant.pressed};
-  }
   path {
     stroke: ${p => p.variant.default};
+  }
 
-    &:hover {
-      stroke: ${p => p.variant.hover};
-    }
+  &:focus path {
+    stroke: ${p => p.variant.pressed};
+  }
 
-    &:disabled {
-      stroke: ${p => p.variant.disabled};
-    }
+  &:hover path {
+    stroke: ${p => p.variant.hover};
+  }
+
+  &:disabled path {
+    stroke: ${p => p.variant.disabled};
   }
 `;
