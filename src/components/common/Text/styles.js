@@ -82,6 +82,25 @@ export const TextBody = styled.p`
   color: ${p => getFontColour(p)};
 `;
 
+export const TextBodyAlternative = styled.p`
+  font-weight: ${regular};
+  font-size: ${textBody};
+  line-height: ${lineBody};
+  color: ${p => getFontColour(p)};
+  margin: 0;
+`;
+
+export const TextLink = styled.a`
+  font-weight: ${regular};
+  font-size: ${textCaption};
+  line-height: ${lineCaption};
+  color: ${p => getFontColour(p)};
+  cursor: pointer;
+  &:hover {
+    text-decoration: underline;
+  }
+`;
+
 export const TextCaption = styled.small`
   font-weight: ${regular};
   font-size: ${textCaption};

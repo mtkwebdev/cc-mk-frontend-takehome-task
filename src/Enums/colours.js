@@ -10,6 +10,7 @@ export const COLOURS = Object.freeze({
     default: "#FFFFFF",
     subdued: "#F3F3F3",
     selected: { default: "#E4F6ED", dark: "#26C281" },
+    footer: { default: "#F7FCFA" },
   },
   icons: {
     default: "#6F7170",

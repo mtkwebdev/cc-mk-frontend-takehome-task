@@ -15,6 +15,7 @@ export const ResultItemTitle = styled.div`
   font-size: ${textXl};
   margin: 2rem 0rem;
   color: ${COLOURS.actions.primary.default};
+  cursor: pointer;
   &:hover {
     color: ${COLOURS.actions.primary.hover};
   }
