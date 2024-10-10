@@ -48,14 +48,6 @@ const SearchEngineFilters = () => {
     dispatch(getMockDatesList());
   }, [dispatch]);
 
-  const setFilters = () => {
-    dispatch(setCategoryFilter());
-    dispatch(setDecisionFilter());
-    dispatch(setCompanyFilter());
-    dispatch(setSelectedDateFilter());
-    dispatch(filterResults());
-  };
-
   return (
     <S.SearchEngineFilters>
       <S.SearchBarFilter>
@@ -74,15 +66,30 @@ const SearchEngineFilters = () => {
           textColour={secondaryText}
           size="lg"
           isSearchBtn={true}
-          onClick={setFilters}>
+          onClick={() => dispatch(filterResults())}>
           Search
         </Button>
       </S.SearchBarFilter>
       <S.DropDownFilters>
-        <Dropdown className="category-area" placeholder="Category" options={categories} />
-        <Dropdown className="decision-area" placeholder="Decision" options={decisions} />
-        <Dropdown className="company-area" placeholder="Company" options={companies} />
-        <Dropdown className="date-area" placeholder="Date" options={dates} />
+        <Dropdown
+          className="category-area"
+          placeholder="Category"
+          options={categories}
+          fn={value => setCategoryFilter(value)}
+        />
+        <Dropdown
+          className="decision-area"
+          placeholder="Decision"
+          options={decisions}
+          fn={value => setDecisionFilter(value)}
+        />
+        <Dropdown
+          className="company-area"
+          placeholder="Company"
+          options={companies}
+          fn={value => setCompanyFilter(value)}
+        />
+        <Dropdown className="date-area" placeholder="Date" options={dates} fn={value => setSelectedDateFilter(value)} />
       </S.DropDownFilters>
     </S.SearchEngineFilters>
   );

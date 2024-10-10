@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import * as S from "./styles.js";
 import Button from "../Button";
@@ -24,7 +25,8 @@ const inputButtonVariant = {
   hover: COLOURS.surface.default,
 };
 
-const Dropdown = ({ placeholder, options, ...otherProps }) => {
+const Dropdown = ({ placeholder, options, fn, ...otherProps }) => {
+  const dispatch = useDispatch();
   const [openDropdownList, setOpenDropdownList] = useState(false);
   const [selectedValue, setSelectedValue] = useState({ text: placeholder, value: null });
 
@@ -33,6 +35,7 @@ const Dropdown = ({ placeholder, options, ...otherProps }) => {
     const selectedValue = options?.find(o => o.text === selectedText).value;
     setSelectedValue({ text: selectedText, value: selectedValue });
     setOpenDropdownList(!openDropdownList);
+    dispatch(fn(selectedText));
   };
 
   return (
