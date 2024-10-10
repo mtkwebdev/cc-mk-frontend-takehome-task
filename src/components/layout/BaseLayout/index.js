@@ -6,10 +6,16 @@ const BaseLayout = ({ children }) => {
   return (
     <>
       <S.BaseLayoutContainer id="base-layout">
-        <SidePanel />
-        {children}
+        <div className="sidepanel">
+          <SidePanel />
+        </div>
+        <div className="content-container">
+          <S.ContentContainer>{children}</S.ContentContainer>
+        </div>
+        <div className="footer-container">
+          <Footer>Footer</Footer>
+        </div>
       </S.BaseLayoutContainer>
-      {/* <Footer>Footer</Footer> */}
     </>
   );
 };

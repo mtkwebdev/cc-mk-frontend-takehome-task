@@ -4,6 +4,7 @@ import { COLOURS } from "../../../enums/colours.js";
 const sidePanelBorderDefaultColour = COLOURS.surface.selected.default;
 
 export const SidePanel = styled.div`
+  height: 100%;
   border-right: 1px solid ${sidePanelBorderDefaultColour};
   padding: 2rem 1.688rem;
   width: min-content;

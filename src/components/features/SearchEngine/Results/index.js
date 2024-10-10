@@ -15,36 +15,36 @@ const SearchEngineResults = () => {
   }, [dispatch]);
 
   return (
-    <div style={{ marginTop: "5rem", overflowX: "auto", height: "50vh" }}>
+    <S.ResultsContainer>
       {data && data.length > 0 ? (
         data.map(({ id, date, title, content, category, decision, company }) => (
-          <div key={id}>
+          <S.ResultsItem key={id}>
             <Text as="Subheading">{formatDate(date)}</Text>
             <S.ResultItemTitle>{title}</S.ResultItemTitle>
             <Text as="TextBody" isSubdued={true}>
               {content}
             </Text>
-            <div style={{ display: "flex", justifyContent: "space-between", marginBottom: "5rem" }}>
-              <div>
+            <S.ResultItemDetailsContainer>
+              <S.ResultItemDetails>
                 <Text as="TextCaption">Category</Text>
                 <Text as="Heading">{category}</Text>
-              </div>
-              <div>
+              </S.ResultItemDetails>
+              <S.ResultItemDetails>
                 <Text as="TextCaption">Decision</Text>
                 <Text as="Heading">{decision}</Text>
-              </div>
-              <div>
+              </S.ResultItemDetails>
+              <S.ResultItemDetails>
                 <Text as="TextCaption">Company</Text>
                 <Text as="Heading">{company}</Text>
-              </div>
-            </div>
+              </S.ResultItemDetails>
+            </S.ResultItemDetailsContainer>
             <hr />
-          </div>
+          </S.ResultsItem>
         ))
       ) : (
         <div>No data</div>
       )}
-    </div>
+    </S.ResultsContainer>
   );
 };
 
