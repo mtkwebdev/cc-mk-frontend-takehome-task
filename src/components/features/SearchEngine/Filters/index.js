@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./styles";
-import InputField from "../../../common/InputFIeld";
+import InputField from "../../../common/InputField/index.js";
 import Dropdown from "../../../common/Dropdown";
 import Button from "../../../common/Button";
 import Text from "../../../common/Text";
@@ -118,6 +118,7 @@ const SearchEngineFilters = () => {
           options={dateOptions}
           updateState={state => setSelectedDateFilter(state)}
           value={selectedDate}
+          isDateInput={true}
         />
       </S.DropDownFilters>
       <S.ClearFiltersContainer>

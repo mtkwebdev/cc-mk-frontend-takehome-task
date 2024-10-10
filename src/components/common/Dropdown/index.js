@@ -7,7 +7,13 @@ import Button from "../Button";
 import InputContainer from "../InputContainer";
 import Text from "../Text/index.js";
 import ChevronIcon from "../../icons/ChevronIcon";
+import CalendarIcon from "../../icons/CalendarIcon";
 import { COLOURS } from "../../../enums/colours.js";
+
+const subduedIcon = {
+  default: COLOURS.text.subdued,
+  hover: COLOURS.text.subdued,
+};
 
 const subduedText = {
   default: COLOURS.text.subdued,
@@ -26,7 +32,7 @@ const inputButtonVariant = {
   hover: COLOURS.surface.default,
 };
 
-const Dropdown = ({ placeholder, options, value, updateState }) => {
+const Dropdown = ({ placeholder, options, value, updateState, isDateInput = false }) => {
   const dispatch = useDispatch();
   const [openDropdownList, setOpenDropdownList] = useState(false);
 
@@ -37,9 +43,11 @@ const Dropdown = ({ placeholder, options, value, updateState }) => {
   };
 
   return (
-    <div>
+    <S.Dropdown isDateInput={isDateInput}>
       <InputContainer>
+        {isDateInput && <CalendarIcon size="sm" variant={subduedIcon} />}
         <Button
+          className="input-button"
           type="button"
           onClick={() => setOpenDropdownList(!openDropdownList)}
           variant={inputButtonVariant}
@@ -73,7 +81,7 @@ const Dropdown = ({ placeholder, options, value, updateState }) => {
           </S.DropdownOptions>
         ) : null}
       </S.DropdownOptionsContainer>
-    </div>
+    </S.Dropdown>
   );
 };
 

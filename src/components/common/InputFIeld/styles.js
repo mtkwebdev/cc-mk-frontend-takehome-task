@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { medium, textButton } from "../../../enums/textStyles.js";
-export const InputFIeld = styled.input`
+export const InputField = styled.input`
   border: none;
   flex: 1 0 max-content;
   width: max-content;

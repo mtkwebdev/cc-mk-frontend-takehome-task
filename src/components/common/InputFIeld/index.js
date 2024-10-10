@@ -17,6 +17,7 @@ const InputField = ({ placeholder, type, label, isSearchInput = false, onChange 
       {isSearchInput && <SearchIcon size="sm" variant={subduedIcon} />}
       <S.InputFIeld
         id={idFromLabel}
+        type={type}
         placeholder={placeholder}
         isSearchInput={isSearchInput}
         onChange={e => onChange(e.target.value)}

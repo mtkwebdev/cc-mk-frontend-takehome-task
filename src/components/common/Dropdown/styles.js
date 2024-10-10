@@ -1,18 +1,16 @@
 import styled from "styled-components";
 import { COLOURS } from "../../../enums/colours";
 export const Dropdown = styled.div`
-  display: flex;
-  flex-direction: column;
-  border: none;
-  flex: 1 0 max-content;
-  width: max-content;
-  padding: 0.9rem;
-  outline: none;
-  font-size: 0.9rem;
-  color: ${COLOURS.text.subdued};
   -moz-appearance: none; /* Firefox */
   -webkit-appearance: none; /* Safari and Chrome */
   appearance: none;
+
+  & > .input-container > .input-button {
+    ${p => {
+      console.log(p.isDateInput);
+    }}
+    padding: ${p => (p.isDateInput ? "0.9rem 0rem" : "0.9rem")};
+  }
 `;
 
 export const ChevronIconContainer = styled.span`
