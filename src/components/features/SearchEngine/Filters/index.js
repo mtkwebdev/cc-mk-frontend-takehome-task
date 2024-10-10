@@ -49,7 +49,6 @@ const SearchEngineFilters = () => {
   }, [dispatch]);
 
   const setFilters = () => {
-    dispatch(setSearchTerm());
     dispatch(setCategoryFilter());
     dispatch(setDecisionFilter());
     dispatch(setCompanyFilter());
@@ -60,7 +59,14 @@ const SearchEngineFilters = () => {
   return (
     <S.SearchEngineFilters>
       <S.SearchBarFilter>
-        <InputField className="search-area" placeholder="Search" type="search" label="search" isSearchInput={true} />
+        <InputField
+          className="search-area"
+          placeholder="Search"
+          type="search"
+          label="search"
+          isSearchInput={true}
+          onChange={value => dispatch(setSearchTerm(value))}
+        />
         <Button
           type="button"
           className="search-button-area"

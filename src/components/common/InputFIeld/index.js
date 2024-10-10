@@ -15,7 +15,12 @@ const InputField = ({ placeholder, type, label, isSearchInput = false, onChange 
   return (
     <InputContainer label="label" idFromLabel={idFromLabel}>
       {isSearchInput && <SearchIcon size="sm" variant={subduedIcon} />}
-      <S.InputFIeld id={idFromLabel} placeholder={placeholder} isSearchInput={isSearchInput} onChange={onChange} />
+      <S.InputFIeld
+        id={idFromLabel}
+        placeholder={placeholder}
+        isSearchInput={isSearchInput}
+        onChange={e => onChange(e.target.value)}
+      />
     </InputContainer>
   );
 };

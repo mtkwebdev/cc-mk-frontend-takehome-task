@@ -8,7 +8,7 @@ import { getMockSearchResults } from "../../../../services/thunks/getDataLists.j
 // const data = getSearchData();
 const SearchEngineResultsItem = () => {
   const dispatch = useDispatch();
-  const data = useSelector(state => state.searchEngineData?.results);
+  const data = useSelector(state => state.searchEngineData?.filteredResults);
   useEffect(() => {
     dispatch(getMockSearchResults());
   }, [dispatch]);

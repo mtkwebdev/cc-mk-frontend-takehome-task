@@ -18,6 +18,7 @@ const initialState = {
   resultPageSize: 3,
   sortBy: ["Newest", "Oldest"],
   results: [],
+  filteredResults: [],
   categoriesList: [],
   decisionsList: [],
   companiesList: [],
@@ -55,8 +56,8 @@ const searchEngineSlice = createSlice({
     },
     filterResults: state => {
       const { searchTerm, category, decision, company, selectedDate } = state;
-      console.log(state.searchTerm);
-      state.results = state.results
+      state.filteredResults = state.results;
+      state.filteredResults = state.filteredResults
         .filter(x => (searchTerm ? x.title.toLowerCase().includes(searchTerm.toLowerCase()) : true))
         .filter(x => (category ? x.category === category : true))
         .filter(x => (decision ? x.decision === decision : true))
@@ -72,6 +73,7 @@ const searchEngineSlice = createSlice({
       .addCase(getMockSearchResults.fulfilled, (state, action) => {
         state.isSearchDataLoading = false;
         state.results = [...action.payload];
+        state.filteredResults = state.results;
       })
       .addCase(getMockCategoriesList.fulfilled, (state, action) => {
         state.categoriesList = [...action.payload];
