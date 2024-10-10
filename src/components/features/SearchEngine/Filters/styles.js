@@ -17,7 +17,7 @@ export const DropDownFilters = styled.div`
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem;
-  @media screen and (max-width: 480px) {
+  @media screen and (max-width: 768px) {
     grid-template-columns: repeat(1, 1fr);
     grid-template-rows: repeat(4, 1fr);
   }
