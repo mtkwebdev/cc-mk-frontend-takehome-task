@@ -13,8 +13,13 @@ const getButtonPadding = p => {
   }
 };
 
+const setButtonDynamicWidth = p => {
+  if (p.isSearchBtn) return "width: 12rem";
+  return p.isFullWidth ? "flex: 1 0 max-content" : "flex:  0 0 min-content";
+};
+
 export const Button = styled.button`
-  flex: ${p => (p.isFullWidth ? "1 0 max-content" : " 0 0 min-content")};
+  ${p => setButtonDynamicWidth(p)};
   border: none;
   font: inherit;
   cursor: pointer;

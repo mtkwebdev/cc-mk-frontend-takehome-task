@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 import * as S from "./styles.js";
 import Button from "../Button";
@@ -20,11 +21,12 @@ const defaultText = {
 };
 
 const inputButtonVariant = {
-  default: "transparent",
-  hover: "transparent",
+  default: COLOURS.surface.default,
+  hover: COLOURS.surface.default,
 };
 
-const InputDropdown = ({ placeholder, options, ...otherProps }) => {
+const Dropdown = ({ placeholder, options, fn, ...otherProps }) => {
+  const dispatch = useDispatch();
   const [openDropdownList, setOpenDropdownList] = useState(false);
   const [selectedValue, setSelectedValue] = useState({ text: placeholder, value: null });
 
@@ -33,6 +35,7 @@ const InputDropdown = ({ placeholder, options, ...otherProps }) => {
     const selectedValue = options?.find(o => o.text === selectedText).value;
     setSelectedValue({ text: selectedText, value: selectedValue });
     setOpenDropdownList(!openDropdownList);
+    dispatch(fn(selectedText));
   };
 
   return (
@@ -53,26 +56,29 @@ const InputDropdown = ({ placeholder, options, ...otherProps }) => {
         </S.ChevronIconContainer>
       </InputContainer>
 
-      <S.DropdownOptions>
-        {openDropdownList &&
-          options.map(({ text }) => (
-            <Button
-              type="button"
-              key={text.replace(" ", "")}
-              onClick={handleSelect}
-              variant={inputButtonVariant}
-              textColour={defaultText}
-              isFullWidth={true}
-              isOption={true}>
-              <Text as="TextBody">{text}</Text>
-            </Button>
-          ))}
-      </S.DropdownOptions>
+      <S.DropdownOptionsContainer>
+        {openDropdownList && options?.length ? (
+          <S.DropdownOptions>
+            {options.map(({ text }) => (
+              <Button
+                type="button"
+                key={text.replace(" ", "")}
+                onClick={handleSelect}
+                variant={inputButtonVariant}
+                textColour={defaultText}
+                isFullWidth={true}
+                isOption={true}>
+                <Text as="TextBody">{text}</Text>
+              </Button>
+            ))}
+          </S.DropdownOptions>
+        ) : null}
+      </S.DropdownOptionsContainer>
     </div>
   );
 };
 
-InputDropdown.propType = {
+Dropdown.propType = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
@@ -81,4 +87,4 @@ InputDropdown.propType = {
   ),
 };
 
-export default InputDropdown;
+export default Dropdown;
