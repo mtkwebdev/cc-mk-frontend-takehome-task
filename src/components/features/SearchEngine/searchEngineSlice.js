@@ -2,11 +2,11 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import {
   getMockSearchResults,
-  getMockCategoriesList,
-  getMockDecisionsList,
-  getMockCompaniesList,
-  getMockDatesList,
-} from "../../../services/thunks/getDataLists.js";
+  getMockCategoriesOptions,
+  getMockDecisionsOptions,
+  getMockCompaniesOptions,
+  getMockDatesOptions,
+} from "../../../services/thunks/getDataOptions.js";
 
 import { filterResultsHelper, setCurrentSearchPageHelper } from "../../../helpers/searchEngineHelpers.js";
 
@@ -36,11 +36,11 @@ const initialState = {
   searchResultsCount: 0,
   searchResults: [],
   filteredSearchResults: [],
-  categoriesList: [],
-  decisionsList: [],
-  companiesList: [],
-  datesList: [],
-  sortByList: [
+  categoriesOptions: [],
+  decisionsOptions: [],
+  companiesOptions: [],
+  datesOptions: [],
+  sortByOptions: [
     { text: "Newest", value: 1 },
     { text: "Oldest", value: 2 },
   ],
@@ -77,6 +77,7 @@ const searchEngineSlice = createSlice({
       state.selectedDate = { text: "", value: null };
       state.pagination.sortBy = { text: "Sort By", value: 0 };
       state.filteredSearchResults = [...state.searchResults];
+      setCurrentSearchPageHelper(state);
     },
     setCurrentSearchResultPage: (state, action) => {
       setCurrentSearchPageHelper(state);
@@ -115,6 +116,7 @@ const searchEngineSlice = createSlice({
         }
         return 0; // No sorting if not specified
       });
+      setCurrentSearchPageHelper(state);
     },
   },
   extraReducers: builder => {
@@ -129,22 +131,38 @@ const searchEngineSlice = createSlice({
         state.searchResultsCount = state.searchResults.length;
         state.pagination.totalPages = Math.floor(state.searchResultsCount / state.pagination.pageSize.value); // e.g.   5 / 20 = 4 pages
       })
-      .addCase(getMockCategoriesList.fulfilled, (state, action) => {
-        state.categoriesList = [...action.payload];
+      .addCase(getMockCategoriesOptions.fulfilled, (state, action) => {
+        state.categoriesOptions = [...action.payload];
       })
-      .addCase(getMockDecisionsList.fulfilled, (state, action) => {
-        state.decisionsList = [...action.payload];
+      .addCase(getMockDecisionsOptions.fulfilled, (state, action) => {
+        state.decisionsOptions = [...action.payload];
       })
-      .addCase(getMockCompaniesList.fulfilled, (state, action) => {
-        state.companiesList = [...action.payload];
+      .addCase(getMockCompaniesOptions.fulfilled, (state, action) => {
+        state.companiesOptions = [...action.payload];
       })
-      .addCase(getMockDatesList.fulfilled, (state, action) => {
-        state.datesList = [...action.payload];
+      .addCase(getMockDatesOptions.fulfilled, (state, action) => {
+        state.datesOptions = [...action.payload];
       });
   },
 });
 
-export const searchResults = state => state.searchEngineData?.filteredSearchResults;
+export const searchResultsState = state => state.searchEngineData?.filteredSearchResults;
+export const categoryOptionsState = state => state.searchEngineData?.categoriesOptions;
+export const decisionOptionsState = state => state.searchEngineData?.decisionsOptions;
+export const companyOptionsState = state => state.searchEngineData?.companiesOptions;
+export const dateOptionsState = state => state.searchEngineData?.datesOptions;
+export const sortByOptionsState = state => state.searchEngineData?.sortByOptions;
+export const sizeOptionsState = state => state.searchEngineData?.pagination.sizeOptions;
+
+export const selectedCategoryState = state => state.searchEngineData?.selectedCategory;
+export const selectedDecisionState = state => state.searchEngineData?.selectedDecision;
+export const selectedCompanyState = state => state.searchEngineData?.selectedCompany;
+export const selectedDateState = state => state.searchEngineData?.selectedDate;
+export const sortByState = state => state.searchEngineData?.pagination.sortBy;
+export const pageSizeState = state => state.searchEngineData?.pagination.pageSize;
+export const firstResultIndexState = state => state.searchEngineData?.pagination.firstResultIndex;
+export const lastResultIndexState = state => state.searchEngineData?.pagination.lastResultIndex;
+export const searchResultsCountState = state => state.searchEngineData?.searchResultsCount;
 
 export const {
   setSearchTerm,

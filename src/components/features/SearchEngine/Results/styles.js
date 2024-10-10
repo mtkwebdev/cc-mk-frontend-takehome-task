@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { COLOURS } from "../../../../enums/colours";
-import { textXl } from "../../../../enums/textStyles";
+import { textLg, light } from "../../../../enums/textStyles";
 
 export const ResultsContainer = styled.div`
   margin-top: 5rem;
@@ -15,8 +15,9 @@ export const ResultsItem = styled.div`
 `;
 
 export const ResultItemTitle = styled.div`
-  font-size: ${textXl};
-  margin: 2rem 0rem;
+  font-size: ${textLg};
+  font-weight: ${light};
+  margin: 1.5rem 0rem;
   color: ${COLOURS.actions.primary.default};
   cursor: pointer;
   &:hover {
@@ -25,8 +26,9 @@ export const ResultItemTitle = styled.div`
 `;
 
 export const ResultItemDetailsContainer = styled.div`
-  display: flex;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: auto;
   margin: 2rem 0rem;
 `;
 

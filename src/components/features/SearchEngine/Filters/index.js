@@ -9,11 +9,11 @@ import Text from "../../../common/Text";
 import { COLOURS } from "../../../../enums/colours";
 
 import {
-  getMockCategoriesList,
-  getMockDecisionsList,
-  getMockCompaniesList,
-  getMockDatesList,
-} from "../../../../services/thunks/getDataLists.js";
+  getMockCategoriesOptions,
+  getMockDecisionsOptions,
+  getMockCompaniesOptions,
+  getMockDatesOptions,
+} from "../../../../services/thunks/getDataOptions.js";
 
 import {
   filterResults,
@@ -25,6 +25,21 @@ import {
   clearAllFilters,
   setSearchResultSortOrder,
   setSearchResultPageSize,
+  categoryOptionsState,
+  decisionOptionsState,
+  companyOptionsState,
+  dateOptionsState,
+  sortByOptionsState,
+  sizeOptionsState,
+  selectedCategoryState,
+  selectedDecisionState,
+  selectedCompanyState,
+  selectedDateState,
+  sortByState,
+  pageSizeState,
+  firstResultIndexState,
+  lastResultIndexState,
+  searchResultsCountState,
 } from "../searchEngineSlice.js";
 
 const primaryButton = {
@@ -51,28 +66,28 @@ const successText = {
 
 const SearchEngineFilters = () => {
   const dispatch = useDispatch();
-  const categoryOptions = useSelector(state => state.searchEngineData?.categoriesList);
-  const decisionOptions = useSelector(state => state.searchEngineData?.decisionsList);
-  const companyOptions = useSelector(state => state.searchEngineData?.companiesList);
-  const dateOptions = useSelector(state => state.searchEngineData?.datesList);
-  const sortByOptions = useSelector(state => state.searchEngineData?.sortByList);
-  const sizeOptions = useSelector(state => state.searchEngineData?.pagination.sizeOptions);
+  const categoryOptions = useSelector(categoryOptionsState);
+  const decisionOptions = useSelector(decisionOptionsState);
+  const companyOptions = useSelector(companyOptionsState);
+  const dateOptions = useSelector(dateOptionsState);
+  const sortByOptions = useSelector(sortByOptionsState);
+  const sizeOptions = useSelector(sizeOptionsState);
 
-  const selectedCategory = useSelector(state => state.searchEngineData?.selectedCategory);
-  const selectedDecision = useSelector(state => state.searchEngineData?.selectedDecision);
-  const selectedCompany = useSelector(state => state.searchEngineData?.selectedCompany);
-  const selectedDate = useSelector(state => state.searchEngineData?.selectedDate);
-  const sortBy = useSelector(state => state.searchEngineData?.pagination.sortBy);
-  const pageSize = useSelector(state => state.searchEngineData?.pagination.pageSize);
-  const firstResultIndex = useSelector(state => state.searchEngineData?.pagination.firstResultIndex);
-  const lastResultIndex = useSelector(state => state.searchEngineData?.pagination.lastResultIndex);
-  const searchResultsCount = useSelector(state => state.searchEngineData?.searchResultsCount);
+  const selectedCategory = useSelector(selectedCategoryState);
+  const selectedDecision = useSelector(selectedDecisionState);
+  const selectedCompany = useSelector(selectedCompanyState);
+  const selectedDate = useSelector(selectedDateState);
+  const sortBy = useSelector(sortByState);
+  const pageSize = useSelector(pageSizeState);
+  const firstResultIndex = useSelector(firstResultIndexState);
+  const lastResultIndex = useSelector(lastResultIndexState);
+  const searchResultsCount = useSelector(searchResultsCountState);
 
   useEffect(() => {
-    dispatch(getMockCategoriesList());
-    dispatch(getMockDecisionsList());
-    dispatch(getMockCompaniesList());
-    dispatch(getMockDatesList());
+    dispatch(getMockCategoriesOptions());
+    dispatch(getMockDecisionsOptions());
+    dispatch(getMockCompaniesOptions());
+    dispatch(getMockDatesOptions());
   }, [dispatch]);
 
   return (

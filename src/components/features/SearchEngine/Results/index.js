@@ -3,13 +3,13 @@ import Text from "../../../common/Text";
 import { formatDate } from "../../../../utils/formatting";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
-import { getMockSearchResults } from "../../../../services/thunks/getDataLists.js";
-import { searchResults } from "../searchEngineSlice.js";
+import { getMockSearchResults } from "../../../../services/thunks/getDataOptions.js";
+import { searchResultsState } from "../searchEngineSlice.js";
 
 // const data = getSearchData();
 const SearchEngineResults = () => {
   const dispatch = useDispatch();
-  const data = useSelector(searchResults);
+  const data = useSelector(searchResultsState);
   useEffect(() => {
     dispatch(getMockSearchResults());
   }, [dispatch]);
@@ -42,7 +42,9 @@ const SearchEngineResults = () => {
           </S.ResultsItem>
         ))
       ) : (
-        <div>No data</div>
+        <Text as="TextMd" isSubdued={true}>
+          Oops! No results found
+        </Text>
       )}
     </S.ResultsContainer>
   );

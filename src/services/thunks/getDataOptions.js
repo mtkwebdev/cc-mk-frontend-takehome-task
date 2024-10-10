@@ -10,7 +10,7 @@ export const getMockSearchResults = createAsyncThunk("/api/getMockSearchData", a
   }
 });
 
-export const getMockCategoriesList = createAsyncThunk("/api/getCategories", async () => {
+export const getMockCategoriesOptions = createAsyncThunk("/api/getCategories", async () => {
   try {
     const res = await getCategories();
     return res;
@@ -18,7 +18,7 @@ export const getMockCategoriesList = createAsyncThunk("/api/getCategories", asyn
     console.err(error);
   }
 });
-export const getMockDecisionsList = createAsyncThunk("/api/getDecisions", async () => {
+export const getMockDecisionsOptions = createAsyncThunk("/api/getDecisions", async () => {
   try {
     const res = await getDecisions();
     return res;
@@ -26,7 +26,7 @@ export const getMockDecisionsList = createAsyncThunk("/api/getDecisions", async 
     console.err(error);
   }
 });
-export const getMockCompaniesList = createAsyncThunk("/api/getCompanies", async () => {
+export const getMockCompaniesOptions = createAsyncThunk("/api/getCompanies", async () => {
   try {
     const res = await getCompanies();
     return res;
@@ -34,7 +34,7 @@ export const getMockCompaniesList = createAsyncThunk("/api/getCompanies", async 
     console.err(error);
   }
 });
-export const getMockDatesList = createAsyncThunk("/api/getDates", async () => {
+export const getMockDatesOptions = createAsyncThunk("/api/getDates", async () => {
   try {
     const res = await getDates();
     return res;

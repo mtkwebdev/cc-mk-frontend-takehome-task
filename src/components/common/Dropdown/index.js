@@ -34,10 +34,10 @@ const inputButtonVariant = {
 
 const Dropdown = ({ placeholder, options, value, updateState, isDateInput = false }) => {
   const dispatch = useDispatch();
-  const [openDropdownList, setOpenDropdownList] = useState(false);
+  const [openDropdownOptions, setOpenDropdownOptions] = useState(false);
 
   const handleClick = returnedObject => {
-    setOpenDropdownList(!openDropdownList);
+    setOpenDropdownOptions(!openDropdownOptions);
 
     return dispatch(updateState(returnedObject));
   };
@@ -49,7 +49,7 @@ const Dropdown = ({ placeholder, options, value, updateState, isDateInput = fals
         <Button
           className="input-button"
           type="button"
-          onClick={() => setOpenDropdownList(!openDropdownList)}
+          onClick={() => setOpenDropdownOptions(!openDropdownOptions)}
           variant={inputButtonVariant}
           textColour={subduedText}
           size="lg"
@@ -63,7 +63,7 @@ const Dropdown = ({ placeholder, options, value, updateState, isDateInput = fals
       </InputContainer>
 
       <S.DropdownOptionsContainer>
-        {openDropdownList && options?.length ? (
+        {openDropdownOptions && options?.length ? (
           <S.DropdownOptions>
             {options.map(({ text }, i) => (
               <Button
@@ -74,7 +74,7 @@ const Dropdown = ({ placeholder, options, value, updateState, isDateInput = fals
                 isFullWidth={true}
                 isOption={true}
                 onClick={() => handleClick(options[i])}
-                isListItem={true}>
+                isOptionsItem={true}>
                 <Text as="TextBody">{text}</Text>
               </Button>
             ))}
