@@ -1,13 +1,13 @@
-import { useState, forwardRef } from "react";
+import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+
 import * as S from "./styles.js";
 import Button from "../Button";
 import InputContainer from "../InputContainer";
 import Text from "../Text/index.js";
 import ChevronIcon from "../../icons/ChevronIcon";
 import { COLOURS } from "../../../enums/colours.js";
-import { useDispatch } from "react-redux";
-import { useEffect } from "react";
 
 const subduedText = {
   default: COLOURS.text.subdued,

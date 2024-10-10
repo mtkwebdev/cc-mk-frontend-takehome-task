@@ -1,4 +1,3 @@
-import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./styles";
 import InputField from "../../../common/InputFIeld";
