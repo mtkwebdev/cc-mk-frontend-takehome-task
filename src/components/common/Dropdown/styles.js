@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { COLOURS } from "../../../enums/colours";
+
 export const Dropdown = styled.div`
   -moz-appearance: none; /* Firefox */
   -webkit-appearance: none; /* Safari and Chrome */
