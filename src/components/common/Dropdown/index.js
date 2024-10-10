@@ -1,4 +1,4 @@
-import { useState, forwardRef, useRef } from "react";
+import { useState, forwardRef } from "react";
 import PropTypes from "prop-types";
 import * as S from "./styles.js";
 import Button from "../Button";
@@ -6,6 +6,8 @@ import InputContainer from "../InputContainer";
 import Text from "../Text/index.js";
 import ChevronIcon from "../../icons/ChevronIcon";
 import { COLOURS } from "../../../enums/colours.js";
+import { useDispatch } from "react-redux";
+import { useEffect } from "react";
 
 const subduedText = {
   default: COLOURS.text.subdued,
@@ -24,13 +26,21 @@ const inputButtonVariant = {
   hover: COLOURS.surface.default,
 };
 
-const Dropdown = forwardRef(({ placeholder, options, value }, ref) => {
+const Dropdown = ({ placeholder, options, value, updateState }) => {
   const [openDropdownList, setOpenDropdownList] = useState(false);
   const [selectedValue, setSelectedValue] = useState(placeholder);
+  const dispatch = useDispatch();
 
   const handleClick = e => {
+    setOpenDropdownList(!openDropdownList);
     setSelectedValue(e.target.innerText);
   };
+
+  useEffect(() => {
+    if (selectedValue !== placeholder) {
+      dispatch(updateState(selectedValue));
+    }
+  }, [selectedValue, dispatch, placeholder, updateState]);
 
   return (
     <div>
@@ -53,7 +63,6 @@ const Dropdown = forwardRef(({ placeholder, options, value }, ref) => {
       <S.DropdownOptionsContainer>
         {openDropdownList && options?.length ? (
           <S.DropdownOptions>
-            <S.SelectedDropdown ref={ref} value={selectedValue} />
             {options.map(({ text }) => (
               <Button
                 type="button"
@@ -71,7 +80,7 @@ const Dropdown = forwardRef(({ placeholder, options, value }, ref) => {
       </S.DropdownOptionsContainer>
     </div>
   );
-});
+};
 
 Dropdown.propType = {
   options: PropTypes.arrayOf(

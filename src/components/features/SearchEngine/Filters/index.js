@@ -41,23 +41,10 @@ const SearchEngineFilters = () => {
   const companyOptions = useSelector(state => state.searchEngineData?.companiesList);
   const dateOptions = useSelector(state => state.searchEngineData?.datesList);
 
-  const categoryValue = useSelector(state => state.searchEngineData?.categoryValue);
-  const decisionValue = useSelector(state => state.searchEngineData?.decisionValue);
-  const companyValue = useSelector(state => state.searchEngineData?.companyValue);
-  const dateValue = useSelector(state => state.searchEngineData?.dateValue);
-
-  const selectedCategory = useRef(null);
-  const selectedDecision = useRef(null);
-  const selectedCompany = useRef(null);
-  const selectedDates = useRef(null);
-
-  const handleDropdownSelections = () => {
-    console.log(selectedCategory);
-    dispatch(setCategoryFilter(selectedCategory.current.value));
-    dispatch(setDecisionFilter(selectedDecision.current.value));
-    dispatch(setCompanyFilter(selectedCompany.current.value));
-    dispatch(setSelectedDateFilter(selectedDates.current.value));
-  };
+  const selectedCategory = useSelector(state => state.searchEngineData?.selectedCategory);
+  const selectedDecision = useSelector(state => state.searchEngineData?.selectedDecision);
+  const selectedCompany = useSelector(state => state.searchEngineData?.selectedCompany);
+  const selectedDate = useSelector(state => state.searchEngineData?.selectedDate);
 
   useEffect(() => {
     dispatch(getMockCategoriesList());
@@ -93,33 +80,29 @@ const SearchEngineFilters = () => {
           className="category-area"
           placeholder="Category"
           options={categoryOptions}
-          ref={selectedCategory}
-          value={categoryValue}
-          onClick={handleDropdownSelections}
+          updateState={state => setCategoryFilter(state)}
+          value={selectedCategory}
         />
         <Dropdown
           className="decision-area"
           placeholder="Decision"
           options={decisionOptions}
-          ref={selectedDecision}
-          value={decisionValue}
-          onClick={handleDropdownSelections}
+          updateState={state => setDecisionFilter(state)}
+          value={selectedDecision}
         />
         <Dropdown
           className="company-area"
           placeholder="Company"
           options={companyOptions}
-          ref={selectedCompany}
-          value={companyValue}
-          onClick={handleDropdownSelections}
+          updateState={state => setCompanyFilter(state)}
+          value={selectedCompany}
         />
         <Dropdown
           className="date-area"
           placeholder="Date"
           options={dateOptions}
-          ref={selectedDates}
-          value={dateValue}
-          onClick={handleDropdownSelections}
+          updateState={state => setSelectedDateFilter(state)}
+          value={selectedDate}
         />
       </S.DropDownFilters>
     </S.SearchEngineFilters>

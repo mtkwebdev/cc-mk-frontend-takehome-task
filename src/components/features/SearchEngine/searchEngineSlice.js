@@ -11,10 +11,10 @@ import {
 const initialState = {
   isSearchDataLoading: false,
   searchTerm: null,
-  categoryValue: null,
-  decisionValue: null,
-  companyValue: null,
-  dateValue: null,
+  selectedCategory: null,
+  selectedDecision: null,
+  selectedCompany: null,
+  selectedDate: null,
   resultPageSize: 3,
   sortBy: ["Newest", "Oldest"],
   results: [],
@@ -34,16 +34,16 @@ const searchEngineSlice = createSlice({
       state.searchTerm = action.payload;
     },
     setCategoryFilter: (state, action) => {
-      state.categoryValue = action.payload;
+      state.selectedCategory = action.payload;
     },
     setDecisionFilter: (state, action) => {
-      state.decisionValue = action.payload;
+      state.selectedDecision = action.payload;
     },
     setCompanyFilter: (state, action) => {
-      state.companyValue = action.payload;
+      state.selectedCompany = action.payload;
     },
     setSelectedDateFilter: (state, action) => {
-      state.dateValue = action.payload;
+      state.selectedDate = action.payload;
     },
     incrementPagination: (state, action) => {
       const totalPageNumbers = state.results.length / state.resultPageSize;
@@ -55,14 +55,14 @@ const searchEngineSlice = createSlice({
       state.paginationPageNumber = currentPage > 1 ? currentPage - 1 : 1;
     },
     filterResults: state => {
-      const { searchTerm, category, decision, company, selectedDate } = state;
+      const { searchTerm, selectedCategory, selectedDecision, selectedCompany, selectedDate } = state;
       state.filteredResults = state.results;
       state.filteredResults = state.filteredResults
         .filter(x => (searchTerm ? x.title.toLowerCase().includes(searchTerm.toLowerCase()) : true))
-        .filter(x => (category ? x.category === category : true))
-        .filter(x => (decision ? x.decision === decision : true))
-        .filter(x => (company ? x.company === company : true))
-        .filter(x => (selectedDate ? x.selectedDate === selectedDate : true));
+        .filter(x => (selectedCategory ? x.category === selectedCategory : true))
+        .filter(x => (selectedDecision ? x.decision === selectedDecision : true))
+        .filter(x => (selectedCompany ? x.company === selectedCompany : true))
+        .filter(x => (selectedDate ? x.date === selectedDate : true));
     },
   },
   extraReducers: builder => {
