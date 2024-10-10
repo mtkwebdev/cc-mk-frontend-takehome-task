@@ -62,7 +62,6 @@ export const COLOURS = Object.freeze({
     highlight: "#2653C2",
     critical: "#CF2D2D",
   },
-
   decorative: {
     surface: {
       one: "#9EC59B",
