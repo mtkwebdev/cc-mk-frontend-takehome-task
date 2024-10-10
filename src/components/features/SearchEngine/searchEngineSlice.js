@@ -34,6 +34,7 @@ const initialState = {
     { text: "Newest", value: 1 },
     { text: "Oldest", value: 2 },
   ],
+  test: null,
 };
 
 const searchEngineSlice = createSlice({
@@ -95,17 +96,21 @@ const searchEngineSlice = createSlice({
       state.pagination.page = page > 1 ? page - 1 : 1;
     },
     setSearchResultSortOrder: (state, action) => {
-      console.log(action.payload?.value);
       state.pagination.sortBy = action.payload;
-      if (state.pagination.sortBy?.value === 2) {
-        state.filteredSearchResults = state.filteredSearchResults.sort((a, b) => {
-          return b.date - a.date;
-        });
-        return;
-      }
-      state.filteredSearchResults = state.filteredSearchResults.sort((a, b) => {
-        return a.date > b.date;
+
+      const resultsCopy = state.filteredSearchResults;
+      state.filteredSearchResults = resultsCopy.sort((a, b) => {
+        const dateA = new Date(a.date).getTime();
+        const dateB = new Date(b.date).getTime();
+        // Check sorting order: "Newest" or "Oldest"
+        if (state.pagination.sortBy.value === 1) {
+          return dateB - dateA; // Newest first
+        } else if (state.pagination.sortBy.value === 2) {
+          return dateA - dateB; // Oldest first
+        }
+        return 0; // No sorting if not specified
       });
+      state.test = resultsCopy;
     },
   },
   extraReducers: builder => {
