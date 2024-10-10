@@ -18,3 +18,9 @@ export const DropDownFilters = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 1.25rem;
 `;
+
+export const ClearFiltersContainer = styled.div`
+  display: flex;
+  justify-content: center;
+  min-width: 10rem;
+`;

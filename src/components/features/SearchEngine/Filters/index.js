@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import * as S from "./styles";
 import InputField from "../../../common/InputFIeld";
@@ -19,6 +20,7 @@ import {
   setDecisionFilter,
   setCompanyFilter,
   setSelectedDateFilter,
+  clearAllFilters,
 } from "../searchEngineSlice.js";
 
 const primaryButton = {
@@ -26,11 +28,21 @@ const primaryButton = {
   hover: COLOURS.actions.primary.hover,
   pressed: COLOURS.actions.primary.default,
 };
+const secondaryButton = {
+  default: COLOURS.actions.secondary.default,
+  hover: COLOURS.actions.secondary.hover,
+  pressed: COLOURS.actions.secondary.default,
+};
 
 const secondaryText = {
   default: COLOURS.actions.secondary.default,
   hover: COLOURS.actions.secondary.hover,
   pressed: COLOURS.actions.secondary.default,
+};
+const successText = {
+  default: COLOURS.text.success,
+  hover: COLOURS.text.success,
+  pressed: COLOURS.text.success,
 };
 
 const SearchEngineFilters = () => {
@@ -104,6 +116,17 @@ const SearchEngineFilters = () => {
           value={selectedDate}
         />
       </S.DropDownFilters>
+      <S.ClearFiltersContainer>
+        <Button
+          type="button"
+          variant={secondaryButton}
+          textColour={successText}
+          size="lg"
+          isFullWidth={false}
+          onClick={() => dispatch(clearAllFilters())}>
+          Clear Filters
+        </Button>
+      </S.ClearFiltersContainer>
     </S.SearchEngineFilters>
   );
 };

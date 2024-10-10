@@ -13,8 +13,6 @@ const SearchEngineResultsItem = () => {
     dispatch(getMockSearchResults());
   }, [dispatch]);
 
-  console.log(data);
-
   return (
     <div style={{ marginTop: "5rem", overflowX: "auto", height: "50vh" }}>
       {data && data.length > 0 ? (

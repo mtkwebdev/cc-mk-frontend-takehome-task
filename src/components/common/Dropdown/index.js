@@ -37,10 +37,13 @@ const Dropdown = ({ placeholder, options, value, updateState }) => {
   };
 
   useEffect(() => {
-    if (selectedValue !== placeholder) {
+    if (selectedValue) {
       dispatch(updateState(selectedValue));
     }
-  }, [selectedValue, dispatch, placeholder, updateState]);
+    if (!value) {
+      setSelectedValue(placeholder);
+    }
+  }, [selectedValue, dispatch, placeholder, updateState, value]);
 
   return (
     <div>

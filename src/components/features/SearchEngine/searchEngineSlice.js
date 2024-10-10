@@ -54,15 +54,24 @@ const searchEngineSlice = createSlice({
       const currentPage = state.paginationPageNumber;
       state.paginationPageNumber = currentPage > 1 ? currentPage - 1 : 1;
     },
-    filterResults: state => {
+    filterResults: (state, action) => {
       const { searchTerm, selectedCategory, selectedDecision, selectedCompany, selectedDate } = state;
-      state.filteredResults = state.results;
+      state.filteredResults = [...state.results];
       state.filteredResults = state.filteredResults
         .filter(x => (searchTerm ? x.title.toLowerCase().includes(searchTerm.toLowerCase()) : true))
         .filter(x => (selectedCategory ? x.category === selectedCategory : true))
         .filter(x => (selectedDecision ? x.decision === selectedDecision : true))
         .filter(x => (selectedCompany ? x.company === selectedCompany : true))
         .filter(x => (selectedDate ? x.date === selectedDate : true));
+    },
+    clearAllFilters: (state, action) => {
+      state.searchTerm = "";
+      state.selectedCategory = null;
+      state.selectedDecision = null;
+      state.selectedCompany = null;
+      state.selectedDate = null;
+      state.filteredResults = [...state.results];
+      console.log(state.selectedCategory);
     },
   },
   extraReducers: builder => {
@@ -99,6 +108,7 @@ export const {
   incrementPagination,
   decrementPagination,
   filterResults,
+  clearAllFilters,
 } = searchEngineSlice.actions;
 
 export default searchEngineSlice.reducer;
