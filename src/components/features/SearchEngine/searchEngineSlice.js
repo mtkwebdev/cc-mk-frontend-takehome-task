@@ -8,7 +8,7 @@ import {
   getMockDatesList,
 } from "../../../services/thunks/getDataLists.js";
 
-import { filterResultsHelper } from "../../../helpers/filterSearchResults.js";
+import { filterResultsHelper, setCurrentSearchPageHelper } from "../../../helpers/searchEngineHelpers.js";
 
 const initialState = {
   isSearchDataLoading: false,
@@ -19,14 +19,13 @@ const initialState = {
   selectedDate: { text: "", value: null },
   pagination: {
     page: 1,
-    size: { text: "5", value: 5 },
-    totalPages: 4,
+    pageSize: { text: "5", value: 5 },
+    totalPages: null,
     totalPageItems: null,
     firstResultItemIndex: 0,
     sizeOptions: [
       { text: "5", value: 5 },
       { text: "10", value: 10 },
-      { text: "15", value: 15 },
       { text: "20", value: 20 },
     ],
     sortBy: { text: "Sort By", value: 0 },
@@ -77,19 +76,11 @@ const searchEngineSlice = createSlice({
       state.filteredSearchResults = [...state.searchResults];
     },
     setCurrentSearchResultPage: (state, action) => {
-      const { size, totalPageItems } = state.pagination;
-      const pageData = [];
-      state.pagination.totalPageItems = state.filteredSearchResults.length; // 20 searchResults
-      state.pagination.totalPages = totalPageItems / size; // e.g.   5 / 20 = 4 pages
-      state.pagination.firstResultItemIndex = state.pagination.page * size - size; // e.g. show items 15-20 on page 4/4
-      state.filteredSearchResults = pageData.fill(
-        size,
-        ...state.filteredSearchResults[state.pagination.firstResultItemIndex]
-      );
+      setCurrentSearchPageHelper(state);
     },
     setSearchResultPageSize: (state, actions) => {
-      state.pagination.size = actions.payload;
-      filterResultsHelper(state);
+      state.pagination.pageSize = actions.payload;
+      setCurrentSearchPageHelper(state);
     },
     incrementPagination: (state, action) => {
       const page = state.pagination.page;

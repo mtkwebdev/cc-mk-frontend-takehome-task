@@ -63,7 +63,7 @@ const SearchEngineFilters = () => {
   const selectedCompany = useSelector(state => state.searchEngineData?.selectedCompany);
   const selectedDate = useSelector(state => state.searchEngineData?.selectedDate);
   const sortBy = useSelector(state => state.searchEngineData?.pagination.sortBy);
-  const pageSize = useSelector(state => state.searchEngineData?.pagination.size);
+  const pageSize = useSelector(state => state.searchEngineData?.pagination.pageSize);
   const totalPages = useSelector(state => state.searchEngineData?.pagination.totalPages);
   const searchResultsCount = useSelector(state => state.searchEngineData?.searchResultsCount);
 
