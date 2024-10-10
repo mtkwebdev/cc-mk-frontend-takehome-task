@@ -8,6 +8,9 @@ export const ResultsContainer = styled.div`
 `;
 
 export const ResultsItem = styled.div`
+  &:first-child {
+    margin-top: 0rem;
+  }
   margin: 5rem 0rem;
 `;
 

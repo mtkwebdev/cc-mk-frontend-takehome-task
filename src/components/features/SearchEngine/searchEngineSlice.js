@@ -20,7 +20,7 @@ const initialState = {
   pagination: {
     page: 1,
     size: { text: "5", value: 5 },
-    totalPages: null,
+    totalPages: 4,
     totalPageItems: null,
     firstResultItemIndex: 0,
     sizeOptions: [
@@ -31,6 +31,7 @@ const initialState = {
     ],
     sortBy: { text: "Sort By", value: 0 },
   },
+  searchResultsCount: 0,
   searchResults: [],
   filteredSearchResults: [],
   categoriesList: [],
@@ -124,6 +125,7 @@ const searchEngineSlice = createSlice({
         state.isSearchDataLoading = false;
         state.searchResults = [...action.payload];
         state.filteredSearchResults = [...state.searchResults];
+        state.searchResultsCount = state.searchResults.length;
       })
       .addCase(getMockCategoriesList.fulfilled, (state, action) => {
         state.categoriesList = [...action.payload];

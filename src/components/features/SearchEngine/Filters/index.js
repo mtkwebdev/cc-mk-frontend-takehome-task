@@ -4,6 +4,8 @@ import * as S from "./styles";
 import InputField from "../../../common/InputFIeld";
 import Dropdown from "../../../common/Dropdown";
 import Button from "../../../common/Button";
+import Text from "../../../common/Text";
+
 import { COLOURS } from "../../../../enums/colours";
 
 import {
@@ -62,6 +64,8 @@ const SearchEngineFilters = () => {
   const selectedDate = useSelector(state => state.searchEngineData?.selectedDate);
   const sortBy = useSelector(state => state.searchEngineData?.pagination.sortBy);
   const pageSize = useSelector(state => state.searchEngineData?.pagination.size);
+  const totalPages = useSelector(state => state.searchEngineData?.pagination.totalPages);
+  const searchResultsCount = useSelector(state => state.searchEngineData?.searchResultsCount);
 
   useEffect(() => {
     dispatch(getMockCategoriesList());
@@ -127,20 +131,30 @@ const SearchEngineFilters = () => {
           Clear Filters
         </Button>
       </S.ClearFiltersContainer>
-      <Dropdown
-        options={sortByOptions}
-        updateState={state => setSearchResultSortOrder(state)}
-        value={sortBy}
-        placeholder={sortBy?.text}
-        isReturnObject={true}
-      />
-      <Dropdown
-        options={sizeOptions}
-        updateState={state => setSearchResultPageSize(state)}
-        value={pageSize}
-        placeholder={pageSize?.text}
-        isReturnObject={true}
-      />
+      <S.SearchResultPageDetailsContainer>
+        <div>
+          <Text as="TextXl"> Results</Text>
+          <Text as="TextBody" isSubdued={true}>
+            {`Showing results of 1-${totalPages} of ${searchResultsCount}`}
+          </Text>
+        </div>
+
+        <Dropdown
+          options={sortByOptions}
+          updateState={state => setSearchResultSortOrder(state)}
+          value={sortBy}
+          placeholder={sortBy?.text}
+          isReturnObject={true}
+        />
+
+        <Dropdown
+          options={sizeOptions}
+          updateState={state => setSearchResultPageSize(state)}
+          value={pageSize}
+          placeholder={pageSize?.text}
+          isReturnObject={true}
+        />
+      </S.SearchResultPageDetailsContainer>
     </S.SearchEngineFilters>
   );
 };

@@ -24,3 +24,15 @@ export const ClearFiltersContainer = styled.div`
   justify-content: center;
   min-width: 10rem;
 `;
+
+export const SearchResultPageDetailsContainer = styled.div`
+  display: grid;
+  grid-template-columns: 6fr 1fr 2fr;
+  grid-template-rows: "1fr";
+  gap: 1.25rem;
+
+  & h1 {
+    margin: 0;
+    text-align: start;
+  }
+`;
