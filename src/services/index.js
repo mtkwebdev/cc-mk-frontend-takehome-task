@@ -5,7 +5,8 @@ const generateMockFilters = property => {
   const arr = [];
   mockData.forEach((data, i) => {
     const isNotDuplicateValue = !arr.find(x => x.text === data[property]);
-    if (isNotDuplicateValue) arr.push({ text: data[property], value: i });
+
+    if (isNotDuplicateValue) arr.push({ text: data[property], value: data[property] });
   });
   return arr;
 };

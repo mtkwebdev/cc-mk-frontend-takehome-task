@@ -128,8 +128,8 @@ const SearchEngineFilters = () => {
         options={sortByOptions}
         updateState={state => setSearchResultSortOrder(state)}
         value={sortBy}
-        placeholder={sortBy.text}
-        valueSelector="value"
+        placeholder={sortBy?.text}
+        isReturnObject={true}
       />
     </S.SearchEngineFilters>
   );

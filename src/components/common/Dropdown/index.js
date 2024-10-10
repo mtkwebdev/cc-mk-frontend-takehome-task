@@ -26,17 +26,14 @@ const inputButtonVariant = {
   hover: COLOURS.surface.default,
 };
 
-const Dropdown = ({ placeholder, options, value, updateState, valueSelector }) => {
+const Dropdown = ({ placeholder, options, value, updateState }) => {
+  const dispatch = useDispatch();
   const [openDropdownList, setOpenDropdownList] = useState(false);
 
-  const dispatch = useDispatch();
-
-  const handleClick = (e, specificValue) => {
+  const handleClick = returnedObject => {
     setOpenDropdownList(!openDropdownList);
-    if (specificValue) {
-      return dispatch(updateState(specificValue));
-    }
-    dispatch(updateState(e.target.innerText));
+
+    return dispatch(updateState(returnedObject));
   };
 
   return (
@@ -50,7 +47,7 @@ const Dropdown = ({ placeholder, options, value, updateState, valueSelector }) =
           size="lg"
           isFullWidth={true}
           isInput={true}>
-          {value ? value["text"] : placeholder}
+          {value?.text ? value?.text : placeholder}
         </Button>
         <S.ChevronIconContainer>
           <ChevronIcon variant={subduedText} size="sm" />
@@ -60,7 +57,7 @@ const Dropdown = ({ placeholder, options, value, updateState, valueSelector }) =
       <S.DropdownOptionsContainer>
         {openDropdownList && options?.length ? (
           <S.DropdownOptions>
-            {options.map(({ text, ...option }) => (
+            {options.map(({ text }, i) => (
               <Button
                 type="button"
                 key={text.replace(" ", "")}
@@ -68,7 +65,7 @@ const Dropdown = ({ placeholder, options, value, updateState, valueSelector }) =
                 textColour={defaultText}
                 isFullWidth={true}
                 isOption={true}
-                onClick={e => handleClick(e, option[valueSelector])}
+                onClick={() => handleClick(options[i])}
                 isListItem={true}>
                 <Text as="TextBody">{text}</Text>
               </Button>

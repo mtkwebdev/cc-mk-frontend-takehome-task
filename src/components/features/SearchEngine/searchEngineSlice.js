@@ -11,10 +11,10 @@ import {
 const initialState = {
   isSearchDataLoading: false,
   searchTerm: null,
-  selectedCategory: null,
-  selectedDecision: null,
-  selectedCompany: null,
-  selectedDate: null,
+  selectedCategory: { text: "", value: null },
+  selectedDecision: { text: "", value: null },
+  selectedCompany: { text: "", value: null },
+  selectedDate: { text: "", value: null },
   pagination: {
     page: 1,
     size: 5,
@@ -60,17 +60,18 @@ const searchEngineSlice = createSlice({
       state.filteredSearchResults = [...state.searchResults];
       state.filteredSearchResults = state.filteredSearchResults
         .filter(x => (searchTerm ? x.title.toLowerCase().includes(searchTerm.toLowerCase()) : true))
-        .filter(x => (selectedCategory ? x.category === selectedCategory : true))
-        .filter(x => (selectedDecision ? x.decision === selectedDecision : true))
-        .filter(x => (selectedCompany ? x.company === selectedCompany : true))
-        .filter(x => (selectedDate ? x.date === selectedDate : true));
+        .filter(x => (selectedCategory?.value ? x.category === selectedCategory?.value : true))
+        .filter(x => (selectedDecision?.value ? x.decision === selectedDecision?.value : true))
+        .filter(x => (selectedCompany?.value ? x.company === selectedCompany?.value : true))
+        .filter(x => (selectedDate?.value ? x.date === selectedDate?.value : true));
     },
     clearAllFilters: (state, action) => {
       state.searchTerm = "";
-      state.selectedCategory = null;
-      state.selectedDecision = null;
-      state.selectedCompany = null;
-      state.selectedDate = null;
+      state.selectedCategory = { text: "", value: null };
+      state.selectedDecision = { text: "", value: null };
+      state.selectedCompany = { text: "", value: null };
+      state.selectedDate = { text: "", value: null };
+      state.pagination.sortBy = { text: "Sort By", value: 0 };
       state.filteredSearchResults = [...state.searchResults];
     },
     setCurrentSearchResultPage: (state, action) => {
@@ -94,8 +95,9 @@ const searchEngineSlice = createSlice({
       state.pagination.page = page > 1 ? page - 1 : 1;
     },
     setSearchResultSortOrder: (state, action) => {
+      console.log(action.payload?.value);
       state.pagination.sortBy = action.payload;
-      if (state.pagination.sortBy === 2) {
+      if (state.pagination.sortBy?.value === 2) {
         state.filteredSearchResults = state.filteredSearchResults.sort((a, b) => {
           return b.date - a.date;
         });
