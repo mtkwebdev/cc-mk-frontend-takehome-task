@@ -15,7 +15,7 @@ const getButtonPadding = p => {
 
 const setButtonFlexGrowShrink = p => {
   if (p.isSearchBtn) return "width: 12rem";
-  return p.isFullWidth ? "flex: 1 0 max-content" : "flex:  0 0 auto";
+  return p.isFullWidth && !p.isListItem ? "flex: 1 0 max-content" : "flex:  0 0 auto";
 };
 
 export const Button = styled.button`

@@ -15,16 +15,14 @@ const initialState = {
   selectedDecision: null,
   selectedCompany: null,
   selectedDate: null,
-  resultsPageData: {
-    currentPage: 1,
-    pageSize: 5,
-    pageSizeOptions: [5, 10, 15, 20],
-    lastPageNumber: 4,
-    firstResultIndex: 0,
-    sortBy: [
-      { text: "Newest", value: "1" },
-      { text: "Oldest", value: 2 },
-    ],
+  pagination: {
+    page: 1,
+    size: 5,
+    totalPages: null,
+    totalPageItems: null,
+    firstResultItemIndex: 0,
+    sizeOptions: [5, 10, 15, 20],
+    sortBy: { text: "Sort By", value: 0 },
   },
   searchResults: [],
   filteredSearchResults: [],
@@ -32,7 +30,10 @@ const initialState = {
   decisionsList: [],
   companiesList: [],
   datesList: [],
-  paginationPageNumber: 1,
+  sortByList: [
+    { text: "Newest", value: 1 },
+    { text: "Oldest", value: 2 },
+  ],
 };
 
 const searchEngineSlice = createSlice({
@@ -72,14 +73,37 @@ const searchEngineSlice = createSlice({
       state.selectedDate = null;
       state.filteredSearchResults = [...state.searchResults];
     },
-    setResultsPage: (state, action) => {
-      // const filteredSearchResults = state.resultsPageData.filteredSearchResults;
-      // const pageSize = state.resultPageSize; // e.g. show 5 items
-      // const totalResultSize = filteredSearchResults.length; // 20 searchResults
-      // const numberOfPages = totalResultSize / state.resultPageSize; // e.g.   5 / 20 = 4 pages
-      // const currentPage = 1;
-      // const resultIndex = currentPage * pageSize; // e.g. page 4 X 5 searchResults   = last 20 searchResults
-      // // for (let i = 0; i < resultsPageData.filteredSearchResults .length; i++) {}
+    setCurrentSearchResultPage: (state, action) => {
+      const { size, totalPageItems } = state.pagination;
+      const pageData = [];
+      state.pagination.totalPageItems = state.filteredSearchResults.length; // 20 searchResults
+      state.pagination.totalPages = totalPageItems / size; // e.g.   5 / 20 = 4 pages
+      state.pagination.firstResultItemIndex = state.pagination.page * size - size; // e.g. show items 15-20 on page 4/4
+      pageData.fill(size, ...state.filteredSearchResults[state.pagination.firstResultItemIndex]);
+    },
+    setSearchResultPageSize: (state, actions) => {
+      state.pagination.size = actions.payload;
+    },
+    incrementPagination: (state, action) => {
+      const page = state.pagination.page;
+      const lastPage = state.pagination.totalPages;
+      if (page < lastPage) state.pagination.page += 1;
+    },
+    decrementPagination: (state, action) => {
+      const page = state.pagination.page;
+      state.pagination.page = page > 1 ? page - 1 : 1;
+    },
+    setSearchResultSortOrder: (state, action) => {
+      state.pagination.sortBy = action.payload;
+      if (state.pagination.sortBy === 2) {
+        state.filteredSearchResults = state.filteredSearchResults.sort((a, b) => {
+          return b.date - a.date;
+        });
+        return;
+      }
+      state.filteredSearchResults = state.filteredSearchResults.sort((a, b) => {
+        return a.date > b.date;
+      });
     },
   },
   extraReducers: builder => {
@@ -119,6 +143,9 @@ export const {
   decrementPagination,
   filterResults,
   clearAllFilters,
+  setCurrentSearchResultPage,
+  setSearchResultPageSize,
+  setSearchResultSortOrder,
 } = searchEngineSlice.actions;
 
 export default searchEngineSlice.reducer;

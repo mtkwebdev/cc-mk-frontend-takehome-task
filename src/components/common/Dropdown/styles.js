@@ -30,7 +30,8 @@ export const DropdownOptionsContainer = styled.div`
 export const DropdownOptions = styled.div`
   position: absolute;
   width: 100%;
-  height: 16rem;
+  height: fit-content;
+  max-height: 16rem;
   overflow-x: auto;
   display: flex;
   flex-direction: column;
@@ -46,8 +47,4 @@ export const DropdownOptions = styled.div`
       color: ${COLOURS.text.success};
     }
   }
-`;
-
-export const SelectedDropdown = styled.li`
-  display: none;
 `;
