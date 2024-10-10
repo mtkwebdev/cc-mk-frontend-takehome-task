@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { COLOURS } from "../../../enums/colours";
 export const PaginationContainer = styled.div`
   display: flex;
-
+  justify-content: center;
   & button {
     padding: 1rem;
     border: none;

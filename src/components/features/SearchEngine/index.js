@@ -2,6 +2,7 @@ import * as S from "./styles";
 import Text from "../../common/Text";
 import SearchEngineFilters from "./Filters";
 import SearchEngineResults from "./Results";
+import Pagination from "../../common/Pagination";
 
 const SearchEngine = () => {
   return (
@@ -16,6 +17,8 @@ const SearchEngine = () => {
 
       <SearchEngineFilters />
       <SearchEngineResults />
+
+      <Pagination />
     </S.SearchEngine>
   );
 };

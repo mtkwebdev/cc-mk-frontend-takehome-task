@@ -13,7 +13,7 @@ export const FooterContent = styled.div`
   grid-template-columns: 3fr 1fr 1fr;
   grid-template-rows: auto;
   width: 80%;
-  margin: auto auto 1rem auto;
+  margin: auto auto auto;
   height: auto;
   padding-bottom: 2rem;
   border-bottom: 1px solid ${COLOURS.borders.subdued};

@@ -127,6 +127,7 @@ const searchEngineSlice = createSlice({
         state.searchResults = [...action.payload];
         state.filteredSearchResults = [...state.searchResults];
         state.searchResultsCount = state.searchResults.length;
+        state.pagination.totalPages = Math.floor(state.searchResultsCount / state.pagination.pageSize.value); // e.g.   5 / 20 = 4 pages
       })
       .addCase(getMockCategoriesList.fulfilled, (state, action) => {
         state.categoriesList = [...action.payload];
