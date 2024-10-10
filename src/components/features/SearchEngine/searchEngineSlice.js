@@ -116,7 +116,6 @@ const searchEngineSlice = createSlice({
         }
         return 0; // No sorting if not specified
       });
-      setCurrentSearchPageHelper(state);
     },
   },
   extraReducers: builder => {
