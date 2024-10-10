@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./styles.js";
@@ -27,23 +27,14 @@ const inputButtonVariant = {
 };
 
 const Dropdown = ({ placeholder, options, value, updateState }) => {
-  const [openDropdownList, setOpenDropdownList] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(placeholder);
   const dispatch = useDispatch();
+  const [openDropdownList, setOpenDropdownList] = useState(false);
 
-  const handleClick = e => {
+  const handleClick = returnedObject => {
     setOpenDropdownList(!openDropdownList);
-    setSelectedValue(e.target.innerText);
-  };
 
-  useEffect(() => {
-    if (selectedValue) {
-      dispatch(updateState(selectedValue));
-    }
-    if (!value) {
-      setSelectedValue(placeholder);
-    }
-  }, [selectedValue, dispatch, placeholder, updateState, value]);
+    return dispatch(updateState(returnedObject));
+  };
 
   return (
     <div>
@@ -56,7 +47,7 @@ const Dropdown = ({ placeholder, options, value, updateState }) => {
           size="lg"
           isFullWidth={true}
           isInput={true}>
-          {selectedValue}
+          {value?.text ? value?.text : placeholder}
         </Button>
         <S.ChevronIconContainer>
           <ChevronIcon variant={subduedText} size="sm" />
@@ -66,7 +57,7 @@ const Dropdown = ({ placeholder, options, value, updateState }) => {
       <S.DropdownOptionsContainer>
         {openDropdownList && options?.length ? (
           <S.DropdownOptions>
-            {options.map(({ text }) => (
+            {options.map(({ text }, i) => (
               <Button
                 type="button"
                 key={text.replace(" ", "")}
@@ -74,7 +65,8 @@ const Dropdown = ({ placeholder, options, value, updateState }) => {
                 textColour={defaultText}
                 isFullWidth={true}
                 isOption={true}
-                onClick={handleClick}>
+                onClick={() => handleClick(options[i])}
+                isListItem={true}>
                 <Text as="TextBody">{text}</Text>
               </Button>
             ))}

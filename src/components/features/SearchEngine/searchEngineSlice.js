@@ -8,22 +8,40 @@ import {
   getMockDatesList,
 } from "../../../services/thunks/getDataLists.js";
 
+import { filterResultsHelper } from "../../../helpers/filterSearchResults.js";
+
 const initialState = {
   isSearchDataLoading: false,
   searchTerm: null,
-  selectedCategory: null,
-  selectedDecision: null,
-  selectedCompany: null,
-  selectedDate: null,
-  resultPageSize: 3,
-  sortBy: ["Newest", "Oldest"],
-  results: [],
-  filteredResults: [],
+  selectedCategory: { text: "", value: null },
+  selectedDecision: { text: "", value: null },
+  selectedCompany: { text: "", value: null },
+  selectedDate: { text: "", value: null },
+  pagination: {
+    page: 1,
+    size: { text: "5", value: 5 },
+    totalPages: null,
+    totalPageItems: null,
+    firstResultItemIndex: 0,
+    sizeOptions: [
+      { text: "5", value: 5 },
+      { text: "10", value: 10 },
+      { text: "15", value: 15 },
+      { text: "20", value: 20 },
+    ],
+    sortBy: { text: "Sort By", value: 0 },
+  },
+  searchResults: [],
+  filteredSearchResults: [],
   categoriesList: [],
   decisionsList: [],
   companiesList: [],
   datesList: [],
-  paginationPageNumber: 1,
+  sortByList: [
+    { text: "Newest", value: 1 },
+    { text: "Oldest", value: 2 },
+  ],
+  test: null,
 };
 
 const searchEngineSlice = createSlice({
@@ -45,33 +63,56 @@ const searchEngineSlice = createSlice({
     setSelectedDateFilter: (state, action) => {
       state.selectedDate = action.payload;
     },
-    incrementPagination: (state, action) => {
-      const totalPageNumbers = state.results.length / state.resultPageSize;
-      const currentPage = state.paginationPageNumber;
-      if (currentPage < totalPageNumbers) state.paginationPageNumber++;
-    },
-    decrementPagination: (state, action) => {
-      const currentPage = state.paginationPageNumber;
-      state.paginationPageNumber = currentPage > 1 ? currentPage - 1 : 1;
-    },
     filterResults: (state, action) => {
-      const { searchTerm, selectedCategory, selectedDecision, selectedCompany, selectedDate } = state;
-      state.filteredResults = [...state.results];
-      state.filteredResults = state.filteredResults
-        .filter(x => (searchTerm ? x.title.toLowerCase().includes(searchTerm.toLowerCase()) : true))
-        .filter(x => (selectedCategory ? x.category === selectedCategory : true))
-        .filter(x => (selectedDecision ? x.decision === selectedDecision : true))
-        .filter(x => (selectedCompany ? x.company === selectedCompany : true))
-        .filter(x => (selectedDate ? x.date === selectedDate : true));
+      filterResultsHelper(state);
     },
     clearAllFilters: (state, action) => {
       state.searchTerm = "";
-      state.selectedCategory = null;
-      state.selectedDecision = null;
-      state.selectedCompany = null;
-      state.selectedDate = null;
-      state.filteredResults = [...state.results];
-      console.log(state.selectedCategory);
+      state.selectedCategory = { text: "", value: null };
+      state.selectedDecision = { text: "", value: null };
+      state.selectedCompany = { text: "", value: null };
+      state.selectedDate = { text: "", value: null };
+      state.pagination.sortBy = { text: "Sort By", value: 0 };
+      state.filteredSearchResults = [...state.searchResults];
+    },
+    setCurrentSearchResultPage: (state, action) => {
+      const { size, totalPageItems } = state.pagination;
+      const pageData = [];
+      state.pagination.totalPageItems = state.filteredSearchResults.length; // 20 searchResults
+      state.pagination.totalPages = totalPageItems / size; // e.g.   5 / 20 = 4 pages
+      state.pagination.firstResultItemIndex = state.pagination.page * size - size; // e.g. show items 15-20 on page 4/4
+      state.filteredSearchResults = pageData.fill(
+        size,
+        ...state.filteredSearchResults[state.pagination.firstResultItemIndex]
+      );
+    },
+    setSearchResultPageSize: (state, actions) => {
+      state.pagination.size = actions.payload;
+      filterResultsHelper(state);
+    },
+    incrementPagination: (state, action) => {
+      const page = state.pagination.page;
+      const lastPage = state.pagination.totalPages;
+      if (page < lastPage) state.pagination.page += 1;
+    },
+    decrementPagination: (state, action) => {
+      const page = state.pagination.page;
+      state.pagination.page = page > 1 ? page - 1 : 1;
+    },
+    setSearchResultSortOrder: (state, action) => {
+      state.pagination.sortBy = action.payload;
+      const resultsCopy = state.filteredSearchResults;
+      state.filteredSearchResults = resultsCopy.sort((a, b) => {
+        const dateA = new Date(a.date).getTime();
+        const dateB = new Date(b.date).getTime();
+        // Check sorting order: "Newest" or "Oldest"
+        if (state.pagination.sortBy.value === 1) {
+          return dateB - dateA; // Newest first
+        } else if (state.pagination.sortBy.value === 2) {
+          return dateA - dateB; // Oldest first
+        }
+        return 0; // No sorting if not specified
+      });
     },
   },
   extraReducers: builder => {
@@ -81,8 +122,8 @@ const searchEngineSlice = createSlice({
       })
       .addCase(getMockSearchResults.fulfilled, (state, action) => {
         state.isSearchDataLoading = false;
-        state.results = [...action.payload];
-        state.filteredResults = state.results;
+        state.searchResults = [...action.payload];
+        state.filteredSearchResults = [...state.searchResults];
       })
       .addCase(getMockCategoriesList.fulfilled, (state, action) => {
         state.categoriesList = [...action.payload];
@@ -99,6 +140,8 @@ const searchEngineSlice = createSlice({
   },
 });
 
+export const searchResults = state => state.searchEngineData?.filteredSearchResults;
+
 export const {
   setSearchTerm,
   setCategoryFilter,
@@ -109,6 +152,9 @@ export const {
   decrementPagination,
   filterResults,
   clearAllFilters,
+  setCurrentSearchResultPage,
+  setSearchResultPageSize,
+  setSearchResultSortOrder,
 } = searchEngineSlice.actions;
 
 export default searchEngineSlice.reducer;

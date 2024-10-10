@@ -21,6 +21,8 @@ import {
   setCompanyFilter,
   setSelectedDateFilter,
   clearAllFilters,
+  setSearchResultSortOrder,
+  setSearchResultPageSize,
 } from "../searchEngineSlice.js";
 
 const primaryButton = {
@@ -51,11 +53,15 @@ const SearchEngineFilters = () => {
   const decisionOptions = useSelector(state => state.searchEngineData?.decisionsList);
   const companyOptions = useSelector(state => state.searchEngineData?.companiesList);
   const dateOptions = useSelector(state => state.searchEngineData?.datesList);
+  const sortByOptions = useSelector(state => state.searchEngineData?.sortByList);
+  const sizeOptions = useSelector(state => state.searchEngineData?.pagination.sizeOptions);
 
   const selectedCategory = useSelector(state => state.searchEngineData?.selectedCategory);
   const selectedDecision = useSelector(state => state.searchEngineData?.selectedDecision);
   const selectedCompany = useSelector(state => state.searchEngineData?.selectedCompany);
   const selectedDate = useSelector(state => state.searchEngineData?.selectedDate);
+  const sortBy = useSelector(state => state.searchEngineData?.pagination.sortBy);
+  const pageSize = useSelector(state => state.searchEngineData?.pagination.size);
 
   useEffect(() => {
     dispatch(getMockCategoriesList());
@@ -68,7 +74,6 @@ const SearchEngineFilters = () => {
     <S.SearchEngineFilters>
       <S.SearchBarFilter>
         <InputField
-          className="search-area"
           placeholder="Search"
           type="search"
           label="search"
@@ -77,7 +82,6 @@ const SearchEngineFilters = () => {
         />
         <Button
           type="button"
-          className="search-button-area"
           variant={primaryButton}
           textColour={secondaryText}
           size="lg"
@@ -88,28 +92,24 @@ const SearchEngineFilters = () => {
       </S.SearchBarFilter>
       <S.DropDownFilters>
         <Dropdown
-          className="category-area"
           placeholder="Category"
           options={categoryOptions}
           updateState={state => setCategoryFilter(state)}
           value={selectedCategory}
         />
         <Dropdown
-          className="decision-area"
           placeholder="Decision"
           options={decisionOptions}
           updateState={state => setDecisionFilter(state)}
           value={selectedDecision}
         />
         <Dropdown
-          className="company-area"
           placeholder="Company"
           options={companyOptions}
           updateState={state => setCompanyFilter(state)}
           value={selectedCompany}
         />
         <Dropdown
-          className="date-area"
           placeholder="Date"
           options={dateOptions}
           updateState={state => setSelectedDateFilter(state)}
@@ -127,6 +127,20 @@ const SearchEngineFilters = () => {
           Clear Filters
         </Button>
       </S.ClearFiltersContainer>
+      <Dropdown
+        options={sortByOptions}
+        updateState={state => setSearchResultSortOrder(state)}
+        value={sortBy}
+        placeholder={sortBy?.text}
+        isReturnObject={true}
+      />
+      <Dropdown
+        options={sizeOptions}
+        updateState={state => setSearchResultPageSize(state)}
+        value={pageSize}
+        placeholder={pageSize?.text}
+        isReturnObject={true}
+      />
     </S.SearchEngineFilters>
   );
 };

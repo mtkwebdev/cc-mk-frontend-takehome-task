@@ -4,11 +4,12 @@ import { formatDate } from "../../../../utils/formatting";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect } from "react";
 import { getMockSearchResults } from "../../../../services/thunks/getDataLists.js";
+import { searchResults } from "../searchEngineSlice.js";
 
 // const data = getSearchData();
-const SearchEngineResultsItem = () => {
+const SearchEngineResults = () => {
   const dispatch = useDispatch();
-  const data = useSelector(state => state.searchEngineData?.filteredResults);
+  const data = useSelector(searchResults);
   useEffect(() => {
     dispatch(getMockSearchResults());
   }, [dispatch]);
@@ -47,4 +48,4 @@ const SearchEngineResultsItem = () => {
   );
 };
 
-export default SearchEngineResultsItem;
+export default SearchEngineResults;

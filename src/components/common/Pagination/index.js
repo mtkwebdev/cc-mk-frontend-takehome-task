@@ -36,15 +36,15 @@ const Pagination = ({ currentPage, totalPages, onPageChange }) => {
 
   return (
     <S.PaginationContainer>
-      <Button type="button" onClick={handlePrevious} disabled={currentPage === 1}>
+      <S.PreviousButton type="button" onClick={handlePrevious} disabled={currentPage === 1}>
         Previous
-      </Button>
+      </S.PreviousButton>
 
       {renderPageNumbers()}
 
-      <Button type="button" onClick={handleNext} disabled={currentPage === totalPages}>
+      <S.NextButton type="button" onClick={handleNext} disabled={currentPage === totalPages}>
         Next
-      </Button>
+      </S.NextButton>
     </S.PaginationContainer>
   );
 };
