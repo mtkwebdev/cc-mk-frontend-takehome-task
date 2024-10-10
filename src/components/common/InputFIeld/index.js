@@ -10,12 +10,12 @@ const subduedIcon = {
   hover: COLOURS.text.subdued,
 };
 
-const InputField = ({ placeholder, type, label, isSearchInput = false }) => {
+const InputField = ({ placeholder, type, label, isSearchInput = false, onChange }) => {
   const idFromLabel = label?.replace(" ", "-");
   return (
     <InputContainer label="label" idFromLabel={idFromLabel}>
       {isSearchInput && <SearchIcon size="sm" variant={subduedIcon} />}
-      <S.InputFIeld id={idFromLabel} placeholder={placeholder} isSearchInput={isSearchInput} />
+      <S.InputFIeld id={idFromLabel} placeholder={placeholder} isSearchInput={isSearchInput} onChange={onChange} />
     </InputContainer>
   );
 };

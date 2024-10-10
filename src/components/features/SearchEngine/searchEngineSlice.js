@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 import {
   getMockSearchResults,
-  getMockCategoriesLists,
-  getMockDecisionsLists,
-  getMockCompaniesLists,
-  getMockDatesLists,
+  getMockCategoriesList,
+  getMockDecisionsList,
+  getMockCompaniesList,
+  getMockDatesList,
 } from "../../../services/thunks/getDataLists.js";
 
 const initialState = {
@@ -18,10 +18,10 @@ const initialState = {
   resultPageSize: 3,
   sortBy: ["Newest", "Oldest"],
   results: [],
-  categoriesLists: [],
-  decisionsLists: [],
-  companiesLists: [],
-  datesLists: [],
+  categoriesList: [],
+  decisionsList: [],
+  companiesList: [],
+  datesList: [],
   paginationPageNumber: 1,
 };
 
@@ -33,56 +33,57 @@ const searchEngineSlice = createSlice({
       state.searchTerm = action.payload;
     },
     setCategoryFilter: (state, action) => {
-      state.category = action.category;
+      state.category = action.payload;
     },
     setDecisionFilter: (state, action) => {
-      state.category = action.category;
+      state.category = action.payload;
     },
     setCompanyFilter: (state, action) => {
-      state.category = action.category;
+      state.category = action.payload;
     },
     setSelectedDateFilter: (state, action) => {
-      state.category = action.category;
+      state.category = action.payload;
     },
-    incrementPagination: state => {
+    incrementPagination: (state, action) => {
       const totalPageNumbers = state.results.length / state.resultPageSize;
       const currentPage = state.paginationPageNumber;
       if (currentPage < totalPageNumbers) state.paginationPageNumber++;
     },
-    decrementPagination: state => {
+    decrementPagination: (state, action) => {
       const currentPage = state.paginationPageNumber;
-      state.paginationPageNumber = currentPage > 1 ? state.paginationPageNumber-- : 1;
+      state.paginationPageNumber = currentPage > 1 ? currentPage - 1 : 1;
     },
     filterResults: state => {
       const { searchTerm, category, decision, company, selectedDate } = state;
-      if (searchTerm) state.results.filter(x => x.title.includes(searchTerm));
-      if (category) state.results.filter(x => (x.category = category));
-      if (decision) state.results.filter(x => (x.decision = decision));
-      if (company) state.results.filter(x => (x.company = company));
-      if (selectedDate) state.results.filter(x => (x.selectedDate = selectedDate));
+      console.log(state.searchTerm);
+      state.results = state.results
+        .filter(x => (searchTerm ? x.title.toLowerCase().includes(searchTerm.toLowerCase()) : true))
+        .filter(x => (category ? x.category === category : true))
+        .filter(x => (decision ? x.decision === decision : true))
+        .filter(x => (company ? x.company === company : true))
+        .filter(x => (selectedDate ? x.selectedDate === selectedDate : true));
     },
   },
   extraReducers: builder => {
     builder
-      .addCase(getMockSearchResults.pending, state => {
+      .addCase(getMockSearchResults.pending, (state, action) => {
         state.isSearchDataLoading = true;
       })
       .addCase(getMockSearchResults.fulfilled, (state, action) => {
-        state.results = action.payload;
-        state.resultPageSize = action.payload.length;
         state.isSearchDataLoading = false;
+        state.results = [...action.payload];
       })
-      .addCase(getMockCategoriesLists.fulfilled, (state, action) => {
-        state.categoriesLists = action.payload;
+      .addCase(getMockCategoriesList.fulfilled, (state, action) => {
+        state.categoriesList = [...action.payload];
       })
-      .addCase(getMockDecisionsLists.fulfilled, (state, action) => {
-        state.decisionsLists = action.payload;
+      .addCase(getMockDecisionsList.fulfilled, (state, action) => {
+        state.decisionsList = [...action.payload];
       })
-      .addCase(getMockCompaniesLists.fulfilled, (state, action) => {
-        state.companiesLists = action.payload;
+      .addCase(getMockCompaniesList.fulfilled, (state, action) => {
+        state.companiesList = [...action.payload];
       })
-      .addCase(getMockDatesLists.fulfilled, (state, action) => {
-        state.datesLists = action.payload;
+      .addCase(getMockDatesList.fulfilled, (state, action) => {
+        state.datesList = [...action.payload];
       });
   },
 });
@@ -97,5 +98,7 @@ export const {
   decrementPagination,
   filterResults,
 } = searchEngineSlice.actions;
+
+export const results = state => state.results;
 
 export default searchEngineSlice.reducer;

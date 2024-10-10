@@ -1,15 +1,26 @@
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 import * as S from "./styles";
 import InputField from "../../../common/InputFIeld";
 import Dropdown from "../../../common/Dropdown";
 import Button from "../../../common/Button";
 import { COLOURS } from "../../../../enums/colours";
 
-import { getCategories, getDecisions, getCompanies, getDates } from "../../../../services/index.js";
+import {
+  getMockCategoriesList,
+  getMockDecisionsList,
+  getMockCompaniesList,
+  getMockDatesList,
+} from "../../../../services/thunks/getDataLists.js";
 
-const categories = getCategories();
-const decisions = getDecisions();
-const companies = getCompanies();
-const dates = getDates();
+import {
+  filterResults,
+  setSearchTerm,
+  setCategoryFilter,
+  setDecisionFilter,
+  setCompanyFilter,
+  setSelectedDateFilter,
+} from "../searchEngineSlice.js";
 
 const primaryButton = {
   default: COLOURS.actions.primary.default,
@@ -24,6 +35,28 @@ const secondaryText = {
 };
 
 const SearchEngineFilters = () => {
+  const dispatch = useDispatch();
+  const categories = useSelector(state => state.searchEngineData?.categoriesList);
+  const decisions = useSelector(state => state.searchEngineData?.decisionsList);
+  const companies = useSelector(state => state.searchEngineData?.companiesList);
+  const dates = useSelector(state => state.searchEngineData?.datesList);
+
+  useEffect(() => {
+    dispatch(getMockCategoriesList());
+    dispatch(getMockDecisionsList());
+    dispatch(getMockCompaniesList());
+    dispatch(getMockDatesList());
+  }, [dispatch]);
+
+  const setFilters = () => {
+    dispatch(setSearchTerm());
+    dispatch(setCategoryFilter());
+    dispatch(setDecisionFilter());
+    dispatch(setCompanyFilter());
+    dispatch(setSelectedDateFilter());
+    dispatch(filterResults());
+  };
+
   return (
     <S.SearchEngineFilters>
       <S.SearchBarFilter>
@@ -34,7 +67,8 @@ const SearchEngineFilters = () => {
           variant={primaryButton}
           textColour={secondaryText}
           size="lg"
-          isSearchBtn={true}>
+          isSearchBtn={true}
+          onClick={setFilters}>
           Search
         </Button>
       </S.SearchBarFilter>

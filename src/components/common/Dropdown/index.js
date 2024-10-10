@@ -54,7 +54,7 @@ const Dropdown = ({ placeholder, options, ...otherProps }) => {
       </InputContainer>
 
       <S.DropdownOptionsContainer>
-        {openDropdownList && (
+        {openDropdownList && options?.length ? (
           <S.DropdownOptions>
             {options.map(({ text }) => (
               <Button
@@ -69,7 +69,7 @@ const Dropdown = ({ placeholder, options, ...otherProps }) => {
               </Button>
             ))}
           </S.DropdownOptions>
-        )}
+        ) : null}
       </S.DropdownOptionsContainer>
     </div>
   );

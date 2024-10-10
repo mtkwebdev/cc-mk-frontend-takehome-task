@@ -1,15 +1,24 @@
 import * as S from "./styles";
 import Text from "../../../common/Text";
-import { getSearchData } from "../../../../services";
 import { formatDate } from "../../../../utils/formatting";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect } from "react";
+import { getMockSearchResults } from "../../../../services/thunks/getDataLists.js";
+
 // const data = getSearchData();
 const SearchEngineResultsItem = () => {
-  const results = useSelector(state => state.results);
+  const dispatch = useDispatch();
+  const data = useSelector(state => state.searchEngineData?.results);
+  useEffect(() => {
+    dispatch(getMockSearchResults());
+  }, [dispatch]);
+
+  console.log(data);
+
   return (
     <div style={{ marginTop: "5rem", overflowX: "auto", height: "50vh" }}>
-      {results &&
-        results?.map(({ id, date, title, content, category, decision, company }) => (
+      {data && data.length > 0 ? (
+        data.map(({ id, date, title, content, category, decision, company }) => (
           <div key={id}>
             <Text as="Subheading">{formatDate(date)}</Text>
             <S.ResultItemTitle>{title}</S.ResultItemTitle>
@@ -32,7 +41,10 @@ const SearchEngineResultsItem = () => {
             </div>
             <hr />
           </div>
-        ))}
+        ))
+      ) : (
+        <div>No data</div>
+      )}
     </div>
   );
 };
