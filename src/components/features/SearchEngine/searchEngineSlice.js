@@ -8,6 +8,8 @@ import {
   getMockDatesList,
 } from "../../../services/thunks/getDataLists.js";
 
+import { filterResultsHelper } from "../../../helpers/filterSearchResults.js";
+
 const initialState = {
   isSearchDataLoading: false,
   searchTerm: null,
@@ -17,11 +19,16 @@ const initialState = {
   selectedDate: { text: "", value: null },
   pagination: {
     page: 1,
-    size: 5,
+    size: { text: "5", value: 5 },
     totalPages: null,
     totalPageItems: null,
     firstResultItemIndex: 0,
-    sizeOptions: [5, 10, 15, 20],
+    sizeOptions: [
+      { text: "5", value: 5 },
+      { text: "10", value: 10 },
+      { text: "15", value: 15 },
+      { text: "20", value: 20 },
+    ],
     sortBy: { text: "Sort By", value: 0 },
   },
   searchResults: [],
@@ -57,14 +64,7 @@ const searchEngineSlice = createSlice({
       state.selectedDate = action.payload;
     },
     filterResults: (state, action) => {
-      const { searchTerm, selectedCategory, selectedDecision, selectedCompany, selectedDate } = state;
-      state.filteredSearchResults = [...state.searchResults];
-      state.filteredSearchResults = state.filteredSearchResults
-        .filter(x => (searchTerm ? x.title.toLowerCase().includes(searchTerm.toLowerCase()) : true))
-        .filter(x => (selectedCategory?.value ? x.category === selectedCategory?.value : true))
-        .filter(x => (selectedDecision?.value ? x.decision === selectedDecision?.value : true))
-        .filter(x => (selectedCompany?.value ? x.company === selectedCompany?.value : true))
-        .filter(x => (selectedDate?.value ? x.date === selectedDate?.value : true));
+      filterResultsHelper(state);
     },
     clearAllFilters: (state, action) => {
       state.searchTerm = "";
@@ -81,10 +81,14 @@ const searchEngineSlice = createSlice({
       state.pagination.totalPageItems = state.filteredSearchResults.length; // 20 searchResults
       state.pagination.totalPages = totalPageItems / size; // e.g.   5 / 20 = 4 pages
       state.pagination.firstResultItemIndex = state.pagination.page * size - size; // e.g. show items 15-20 on page 4/4
-      pageData.fill(size, ...state.filteredSearchResults[state.pagination.firstResultItemIndex]);
+      state.filteredSearchResults = pageData.fill(
+        size,
+        ...state.filteredSearchResults[state.pagination.firstResultItemIndex]
+      );
     },
     setSearchResultPageSize: (state, actions) => {
       state.pagination.size = actions.payload;
+      filterResultsHelper(state);
     },
     incrementPagination: (state, action) => {
       const page = state.pagination.page;
@@ -97,7 +101,6 @@ const searchEngineSlice = createSlice({
     },
     setSearchResultSortOrder: (state, action) => {
       state.pagination.sortBy = action.payload;
-
       const resultsCopy = state.filteredSearchResults;
       state.filteredSearchResults = resultsCopy.sort((a, b) => {
         const dateA = new Date(a.date).getTime();
@@ -110,7 +113,6 @@ const searchEngineSlice = createSlice({
         }
         return 0; // No sorting if not specified
       });
-      state.test = resultsCopy;
     },
   },
   extraReducers: builder => {
