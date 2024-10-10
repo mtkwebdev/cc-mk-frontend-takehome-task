@@ -1,6 +1,7 @@
-import { useState } from "react";
 import { useDispatch } from "react-redux";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+
 import * as S from "./styles.js";
 import Button from "../Button";
 import InputContainer from "../InputContainer";
@@ -25,18 +26,24 @@ const inputButtonVariant = {
   hover: COLOURS.surface.default,
 };
 
-const Dropdown = ({ placeholder, options, fn, ...otherProps }) => {
-  const dispatch = useDispatch();
+const Dropdown = ({ placeholder, options, value, updateState }) => {
   const [openDropdownList, setOpenDropdownList] = useState(false);
-  const [selectedValue, setSelectedValue] = useState({ text: placeholder, value: null });
+  const [selectedValue, setSelectedValue] = useState(placeholder);
+  const dispatch = useDispatch();
 
-  const handleSelect = e => {
-    const selectedText = e.target.innerText;
-    const selectedValue = options?.find(o => o.text === selectedText).value;
-    setSelectedValue({ text: selectedText, value: selectedValue });
+  const handleClick = e => {
     setOpenDropdownList(!openDropdownList);
-    dispatch(fn(selectedText));
+    setSelectedValue(e.target.innerText);
   };
+
+  useEffect(() => {
+    if (selectedValue) {
+      dispatch(updateState(selectedValue));
+    }
+    if (!value) {
+      setSelectedValue(placeholder);
+    }
+  }, [selectedValue, dispatch, placeholder, updateState, value]);
 
   return (
     <div>
@@ -49,7 +56,7 @@ const Dropdown = ({ placeholder, options, fn, ...otherProps }) => {
           size="lg"
           isFullWidth={true}
           isInput={true}>
-          {selectedValue.text}
+          {selectedValue}
         </Button>
         <S.ChevronIconContainer>
           <ChevronIcon variant={subduedText} size="sm" />
@@ -63,11 +70,11 @@ const Dropdown = ({ placeholder, options, fn, ...otherProps }) => {
               <Button
                 type="button"
                 key={text.replace(" ", "")}
-                onClick={handleSelect}
                 variant={inputButtonVariant}
                 textColour={defaultText}
                 isFullWidth={true}
-                isOption={true}>
+                isOption={true}
+                onClick={handleClick}>
                 <Text as="TextBody">{text}</Text>
               </Button>
             ))}
@@ -83,6 +90,7 @@ Dropdown.propType = {
     PropTypes.shape({
       text: PropTypes.string.isRequired,
       value: PropTypes.any.isRequired,
+      ref: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]).isRequired,
     })
   ),
 };

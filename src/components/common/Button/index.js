@@ -1,7 +1,7 @@
 import * as S from "./styles";
 import PropTypes from "prop-types";
-const Button = ({ ...props }) => {
-  return <S.Button {...props} />;
+const Button = ({ children, ...props }) => {
+  return <S.Button {...props}>{children}</S.Button>;
 };
 
 Button.propTypes = {

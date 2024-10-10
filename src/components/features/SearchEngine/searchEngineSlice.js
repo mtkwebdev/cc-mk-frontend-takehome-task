@@ -11,9 +11,9 @@ import {
 const initialState = {
   isSearchDataLoading: false,
   searchTerm: null,
-  category: null,
-  decision: null,
-  company: null,
+  selectedCategory: null,
+  selectedDecision: null,
+  selectedCompany: null,
   selectedDate: null,
   resultPageSize: 3,
   sortBy: ["Newest", "Oldest"],
@@ -34,16 +34,16 @@ const searchEngineSlice = createSlice({
       state.searchTerm = action.payload;
     },
     setCategoryFilter: (state, action) => {
-      state.category = action.payload;
+      state.selectedCategory = action.payload;
     },
     setDecisionFilter: (state, action) => {
-      state.category = action.payload;
+      state.selectedDecision = action.payload;
     },
     setCompanyFilter: (state, action) => {
-      state.category = action.payload;
+      state.selectedCompany = action.payload;
     },
     setSelectedDateFilter: (state, action) => {
-      state.category = action.payload;
+      state.selectedDate = action.payload;
     },
     incrementPagination: (state, action) => {
       const totalPageNumbers = state.results.length / state.resultPageSize;
@@ -54,15 +54,24 @@ const searchEngineSlice = createSlice({
       const currentPage = state.paginationPageNumber;
       state.paginationPageNumber = currentPage > 1 ? currentPage - 1 : 1;
     },
-    filterResults: state => {
-      const { searchTerm, category, decision, company, selectedDate } = state;
-      state.filteredResults = state.results;
+    filterResults: (state, action) => {
+      const { searchTerm, selectedCategory, selectedDecision, selectedCompany, selectedDate } = state;
+      state.filteredResults = [...state.results];
       state.filteredResults = state.filteredResults
         .filter(x => (searchTerm ? x.title.toLowerCase().includes(searchTerm.toLowerCase()) : true))
-        .filter(x => (category ? x.category === category : true))
-        .filter(x => (decision ? x.decision === decision : true))
-        .filter(x => (company ? x.company === company : true))
-        .filter(x => (selectedDate ? x.selectedDate === selectedDate : true));
+        .filter(x => (selectedCategory ? x.category === selectedCategory : true))
+        .filter(x => (selectedDecision ? x.decision === selectedDecision : true))
+        .filter(x => (selectedCompany ? x.company === selectedCompany : true))
+        .filter(x => (selectedDate ? x.date === selectedDate : true));
+    },
+    clearAllFilters: (state, action) => {
+      state.searchTerm = "";
+      state.selectedCategory = null;
+      state.selectedDecision = null;
+      state.selectedCompany = null;
+      state.selectedDate = null;
+      state.filteredResults = [...state.results];
+      console.log(state.selectedCategory);
     },
   },
   extraReducers: builder => {
@@ -99,8 +108,7 @@ export const {
   incrementPagination,
   decrementPagination,
   filterResults,
+  clearAllFilters,
 } = searchEngineSlice.actions;
-
-export const results = state => state.results;
 
 export default searchEngineSlice.reducer;

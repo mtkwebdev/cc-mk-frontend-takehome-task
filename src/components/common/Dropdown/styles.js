@@ -47,3 +47,7 @@ export const DropdownOptions = styled.div`
     }
   }
 `;
+
+export const SelectedDropdown = styled.li`
+  display: none;
+`;
