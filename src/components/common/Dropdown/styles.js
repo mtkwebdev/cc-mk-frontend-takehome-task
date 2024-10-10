@@ -6,9 +6,6 @@ export const Dropdown = styled.div`
   appearance: none;
 
   & > .input-container > .input-button {
-    ${p => {
-      console.log(p.isDateInput);
-    }}
     padding: ${p => (p.isDateInput ? "0.9rem 0rem" : "0.9rem")};
   }
 `;
