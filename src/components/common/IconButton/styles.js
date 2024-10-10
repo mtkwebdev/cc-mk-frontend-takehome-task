@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { COLOURS } from "../../../enums/colours";
 
 export const IconButton = styled.button`
   background: none;
@@ -15,6 +16,10 @@ export const IconButton = styled.button`
 
   &:focus {
     background-color: ${p => p.variant.pressed || "inherit"};
+    & svg,
+    & path {
+      stroke: ${COLOURS.icons.success} !important;
+    }
   }
 
   &:hover {

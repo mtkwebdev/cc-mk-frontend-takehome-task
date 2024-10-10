@@ -15,20 +15,20 @@ const SidePanel = () => {
   const sidePanelIconColours = {
     default: COLOURS.sidePanel.success?.default,
     hover: COLOURS.sidePanel.success?.hover,
-    pressed: COLOURS.sidePanel.success?.pressed,
+    pressed: COLOURS.icons.success,
     disabled: COLOURS.sidePanel.success?.disabled,
   };
 
   const courtCorrectLogoIcon = process.env.PUBLIC_URL + "/icon.png";
 
   const SidePanelIcons = [
-    { name: "CogIcon" },
-    { name: "ContactsIcon" },
-    { name: "HelpIcon" },
     { name: "HomeIcon" },
+    { name: "SuitcaseIcon" },
+    { name: "ContactsIcon" },
     { name: "NewFileIcon" },
     { name: "SearchIcon" },
-    { name: "SuitcaseIcon" },
+    { name: "CogIcon" },
+    { name: "HelpIcon" },
   ];
 
   return (
