@@ -78,6 +78,10 @@ const searchEngineSlice = createSlice({
     setCurrentSearchResultPage: (state, action) => {
       setCurrentSearchPageHelper(state);
     },
+    setCurrentPage: (state, action) => {
+      state.pagination.page = action.payload;
+      setCurrentSearchPageHelper(state);
+    },
     setSearchResultPageSize: (state, actions) => {
       state.pagination.pageSize = actions.payload;
       setCurrentSearchPageHelper(state);
@@ -148,6 +152,7 @@ export const {
   setCurrentSearchResultPage,
   setSearchResultPageSize,
   setSearchResultSortOrder,
+  setCurrentPage,
 } = searchEngineSlice.actions;
 
 export default searchEngineSlice.reducer;

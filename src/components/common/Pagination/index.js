@@ -1,58 +1,55 @@
-import React from "react";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import PropTypes from "prop-types";
 import * as S from "./styles";
-import Button from "../Button";
 
-const Pagination = ({ currentPage, totalPages, onPageChange }) => {
-  const handlePrevious = () => {
-    if (currentPage > 1) {
-      onPageChange(currentPage - 1);
-    }
+import {
+  incrementPagination,
+  decrementPagination,
+  setSearchResultPageSize,
+  setCurrentPage,
+} from "../../features/SearchEngine/searchEngineSlice.js";
+const Pagination = () => {
+  const dispatch = useDispatch();
+
+  const numberOfPages = useSelector(state => state.searchEngineData?.pagination.totalPages) || 10;
+
+  useEffect(() => {
+    dispatch(setSearchResultPageSize({ text: "5", value: 5 }));
+  }, [dispatch]);
+
+  const handleNextPage = () => {
+    dispatch(incrementPagination());
+  };
+  const handlePreviousPage = () => {
+    dispatch(decrementPagination());
+  };
+  const handleSetCurrentPage = e => {
+    setCurrentPage(parseInt(e.target.value));
   };
 
-  const handleNext = () => {
-    if (currentPage < totalPages) {
-      onPageChange(currentPage + 1);
-    }
-  };
-
-  const handlePageClick = page => {
-    if (page !== currentPage) {
-      onPageChange(page);
-    }
-  };
-
-  const renderPageNumbers = () => {
-    const pages = [];
-    for (let i = 1; i <= totalPages; i++) {
-      pages.push(
-        <Button key={i} type="button" onClick={() => handlePageClick(i)} isActive={currentPage === i}>
+  const pageButtons = () => {
+    for (let i = 0; i < 4; i) {
+      return (
+        <button type="button" onClick={e => handleSetCurrentPage(e)}>
           {i}
-        </Button>
+        </button>
       );
     }
-    return pages;
   };
 
   return (
     <S.PaginationContainer>
-      <S.PreviousButton type="button" onClick={handlePrevious} disabled={currentPage === 1}>
+      <S.PreviousButton type="button" onClick={handlePreviousPage}>
         Previous
       </S.PreviousButton>
+      {pageButtons()}
 
-      {renderPageNumbers()}
-
-      <S.NextButton type="button" onClick={handleNext} disabled={currentPage === totalPages}>
+      <S.NextButton type="button" onClick={handleNextPage}>
         Next
       </S.NextButton>
     </S.PaginationContainer>
   );
-};
-
-Pagination.propTypes = {
-  currentPage: PropTypes.number.isRequired,
-  totalPages: PropTypes.number.isRequired,
-  onPageChange: PropTypes.func.isRequired,
 };
 
 export default Pagination;

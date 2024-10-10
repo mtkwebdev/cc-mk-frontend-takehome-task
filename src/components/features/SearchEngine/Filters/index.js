@@ -5,6 +5,7 @@ import InputField from "../../../common/InputField/index.js";
 import Dropdown from "../../../common/Dropdown";
 import Button from "../../../common/Button";
 import Text from "../../../common/Text";
+import Pagination from "../../../common/Pagination";
 
 import { COLOURS } from "../../../../enums/colours";
 
@@ -76,6 +77,7 @@ const SearchEngineFilters = () => {
 
   return (
     <S.SearchEngineFilters>
+      <Pagination />
       <S.SearchBarFilter>
         <InputField
           placeholder="Search"
