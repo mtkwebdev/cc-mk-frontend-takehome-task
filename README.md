@@ -1,72 +1,61 @@
-# Frontend Takehome Task
+## Technical Test Submission by Mohammad Kawadri - mohammadkawadri.com
 
-This project is a simple frontend web application built in React. The main functionality to implement is a single-page search engine, styled according to the provided Figma design.
+#### Project Overview
 
-## Project Overview
+Hi! I really enjoyed working on this task. Below is a breakdown of my thought process and approach during its implementation.
 
-The goal is to create a search engine using a React.js frontend, primarily styled with `styled-components`. This project should be implemented as a Single Page Application (SPA), reflecting the design accurately while providing an interactive user experience.
+#### Technologies Used
 
-Once completed, please upload your solution to a public GitHub repository and send us the link for review. **Note: Please do not make any Pull Requests (PRs) to this repository.**
+React.js: For building UI components using the latest version.
+Styled-components: For creating modular and reusable component styling.
+JavaScript (ES6+): Leveraging modern language features.
+Redux Toolkit: For managing and sharing state across components.
+Dayjs: A lightweight alternative to Moment.js for date manipulation.
+PropTypes: For validating component props.
+Note: Everything else was built from scratch. No additional libraries were used.
 
-### Technologies Used
+#### Component Design Breakdown
 
-- **React.js**: Latest version for building UI components.
-- **Styled-components**: For modular and reusable component styling.
-- **JavaScript (ES6+)**: For leveraging modern language features.
+I typically start by writing a to-do list to break down large tasks into manageable solutions. After reviewing the Figma file, I divided the design into potential common, feature, and layout components.
 
-Feel free to add other packages that enhance functionality or improve efficiency, but focus on using `styled-components` for CSS. **Note: Do not use Material UI or any similar CSS frameworks.**
+However, as I worked on implementing the design system and icons, I began to deviate from the to-do list. Although I appreciated the style guide provided, I found the color variants a bit confusing. Hopefully, I've come close to achieving the intended design.
 
-## Project Structure
+#### Project Setup
 
-The project is structured as follows:
+Early on, I realized that the app was built using Create React App with Webpack hidden behind a React eject. I wasn't sure if I should eject the project to expose Webpack for adding aliases and parsing SVG files.
 
-```
-├── public/
-├── src/
-│    └── components/
-│    │    └── common/ # Reusable UI elements (buttons, input fields)
-│    │    └── features/ # Feature-specific components (search bar, search results)
-│    │    └── layout/ # Layout components (header, footer, sidebar)
-│    │    └── pages/ # Page-level components (SearchPage)
-│    └── services/ # Services for API calls, data fetching, etc.
-├── App.js
-├── index.js
-├── README.md # Project documentation
-└── package.json # Project dependencies and scripts
-```
+Instead, I decided not to eject or introduce Vite or Webpack changes, as doing so in a real-world project would require planning and discussion with the team. Since this was a mock task, I opted to stick with the existing setup.
 
-## Getting Started
+I did attempt to use the Craco library for aliasing, but it caused issues midway through the task, so I removed it and reverted to the original setup.
 
-To get started with running the application locally, follow these steps:
+#### Branches and Merge Requests
 
-### Prerequisites
+I intended to create separate branches for each common, feature, and layout component, but I had to balance completing other technical tests alongside this one. Ultimately, I focused on completing the task as thoroughly as possible.
 
-Ensure you have **Node.js** (v14 or later) and **npm** installed on your machine.
+#### Redux and Thunk
 
-### Installation
+I chose to use Redux over the Context API because I find Redux Toolkit to be more robust, and since Redux is part of your tech stack, I wanted to demonstrate my experience with it in this project.
 
-1. Clone the repository to your local machine:
+In the services file, there was a mock service function called getSearchResults. I created additional mock services for the dropdown filters by using the provided mock data to generate filter options. Each filter property was used to generate mock filtered results.
 
-   ```bash
-   git clone https://github.com/courtcorrect/frontend-takehome-task.git
-   cd frontend-takehome-task
+I also implemented mock async HTTP requests to demonstrate my proficiency with Redux Thunk for handling asynchronous actions.
 
-   ```
+#### Unit testing
 
-2. Install the necessary dependencies:
+Due to my current workload, including technical tests for other companies, I was unable to allocate sufficient time to write unit tests for this project. Although I understand the importance of unit testing in ensuring code reliability and maintainability, I had to prioritize completing the core functionality of the task within the given timeframe. Under different circumstances, I would have dedicated time to implementing a full suite of tests to validate the components and logic thoroughly.
 
-   ```bash
-   npm install
-   ```
+#### Bugs
 
-3. Start the development server:
-   ```bash
-   npm start
-   ```
+The only bug I’m currently aware of in this submission is that when switching pages, the page size incorrectly defaults to showing 10 results per page, regardless of the selected page size.
 
-The React app should now be running at `http://localhost:3000`.
+Although, the page size filter and other filters work as intended.
 
-## Additional Notes
+#### Conclusion:
 
-- If you encounter any issues or have questions, feel free to reach out.
-- Important: Do not make any Pull Requests to this repository. Instead, upload your final version to your own GitHub and share the link for review.
+I really enjoyed working on this project, and look forward to hearing your feedback soon.
+
+Kind regards,
+
+Mohammad Kawadri
+
+mohammadkawadri.com
