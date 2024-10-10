@@ -6,13 +6,18 @@ Hi! I really enjoyed working on this task. Below is a breakdown of my thought pr
 
 ## Technologies Used
 
-React.js: For building UI components using the latest version.
-Styled-components: For creating modular and reusable component styling.
-JavaScript (ES6+): Leveraging modern language features.
-Redux Toolkit: For managing and sharing state across components.
-Dayjs: A lightweight alternative to Moment.js for date manipulation.
-PropTypes: For validating component props.
-Note: Everything else was built from scratch. No additional libraries were used.
+- **React.js:** For building UI components using the latest version.
+- **Styled-components:** For creating modular and reusable component styling.
+- **JavaScript (ES6+**): Leveraging modern language features.
+- **Redux Toolkit:** For managing and sharing state across components.
+- **Dayjs:** A lightweight alternative to Moment.js for date manipulation.
+- **PropTypes:** For validating component props.
+
+---
+
+> Note: Everything else was built from scratch. No additional libraries were used.
+
+---
 
 ## Component Design Breakdown
 
