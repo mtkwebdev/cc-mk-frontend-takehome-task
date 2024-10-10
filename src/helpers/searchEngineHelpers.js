@@ -21,13 +21,15 @@ export const setCurrentSearchPageHelper = state => {
   state.pagination.totalPages = Math.floor(state.searchResultsCount / pageSize.value); // e.g.   5 / 20 = 4 pages
 
   // find index of result for the current page
-  state.pagination.firstResultItemIndex = state.pagination.page * pageSize.value - pageSize.value; // e.g. show items 15-20 on page 4/4
+  state.pagination.firstResultArrIndex = state.pagination.page * pageSize.value - pageSize.value; // e.g. show items 15-20 on page 4/4
 
   // set the length of items shown per page
-  state.pagination.totalPageItems = state.pagination.firstResultItemIndex + pageSize.value;
+  state.pagination.totalPageItems = state.pagination.firstResultArrIndex + pageSize.value;
 
   // page result starts from i and ends with ii
-  const i = state.pagination.firstResultItemIndex;
+  const i = state.pagination.firstResultArrIndex;
   const ii = state.pagination.totalPageItems;
+  state.pagination.firstResultIndex = i + 1;
+  state.pagination.lastResultIndex = ii;
   state.filteredSearchResults = arr.splice(i, ii);
 };

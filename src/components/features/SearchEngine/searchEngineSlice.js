@@ -22,7 +22,10 @@ const initialState = {
     pageSize: { text: "5", value: 5 },
     totalPages: null,
     totalPageItems: null,
-    firstResultItemIndex: 0,
+    firstResultArrIndex: 0,
+    firstResultIndex: 0, // first - last of all
+    lastResultIndex: 0, // // first - last of all
+    lastResultItemIndex: 0,
     sizeOptions: [
       { text: "5", value: 5 },
       { text: "10", value: 10 },

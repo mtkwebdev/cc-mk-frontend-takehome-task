@@ -65,7 +65,8 @@ const SearchEngineFilters = () => {
   const selectedDate = useSelector(state => state.searchEngineData?.selectedDate);
   const sortBy = useSelector(state => state.searchEngineData?.pagination.sortBy);
   const pageSize = useSelector(state => state.searchEngineData?.pagination.pageSize);
-  const totalPages = useSelector(state => state.searchEngineData?.pagination.totalPages);
+  const firstResultIndex = useSelector(state => state.searchEngineData?.pagination.firstResultIndex);
+  const lastResultIndex = useSelector(state => state.searchEngineData?.pagination.lastResultIndex);
   const searchResultsCount = useSelector(state => state.searchEngineData?.searchResultsCount);
 
   useEffect(() => {
@@ -138,7 +139,7 @@ const SearchEngineFilters = () => {
         <div>
           <Text as="TextXl"> Results</Text>
           <Text as="TextBody" isSubdued={true}>
-            {`Showing results of 1-${totalPages} of ${searchResultsCount}`}
+            {`Showing results of ${firstResultIndex} - ${lastResultIndex} of ${searchResultsCount}`}
           </Text>
         </div>
 
