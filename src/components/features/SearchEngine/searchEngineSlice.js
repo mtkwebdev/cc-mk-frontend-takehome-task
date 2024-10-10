@@ -11,10 +11,10 @@ import {
 const initialState = {
   isSearchDataLoading: false,
   searchTerm: null,
-  category: null,
-  decision: null,
-  company: null,
-  selectedDate: null,
+  categoryValue: null,
+  decisionValue: null,
+  companyValue: null,
+  dateValue: null,
   resultPageSize: 3,
   sortBy: ["Newest", "Oldest"],
   results: [],
@@ -34,16 +34,16 @@ const searchEngineSlice = createSlice({
       state.searchTerm = action.payload;
     },
     setCategoryFilter: (state, action) => {
-      state.category = action.payload;
+      state.categoryValue = action.payload;
     },
     setDecisionFilter: (state, action) => {
-      state.category = action.payload;
+      state.decisionValue = action.payload;
     },
     setCompanyFilter: (state, action) => {
-      state.category = action.payload;
+      state.companyValue = action.payload;
     },
     setSelectedDateFilter: (state, action) => {
-      state.category = action.payload;
+      state.dateValue = action.payload;
     },
     incrementPagination: (state, action) => {
       const totalPageNumbers = state.results.length / state.resultPageSize;
@@ -100,7 +100,5 @@ export const {
   decrementPagination,
   filterResults,
 } = searchEngineSlice.actions;
-
-export const results = state => state.results;
 
 export default searchEngineSlice.reducer;

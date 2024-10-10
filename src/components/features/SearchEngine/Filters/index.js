@@ -1,5 +1,5 @@
+import { useEffect, useRef } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
 import * as S from "./styles";
 import InputField from "../../../common/InputFIeld";
 import Dropdown from "../../../common/Dropdown";
@@ -36,10 +36,28 @@ const secondaryText = {
 
 const SearchEngineFilters = () => {
   const dispatch = useDispatch();
-  const categories = useSelector(state => state.searchEngineData?.categoriesList);
-  const decisions = useSelector(state => state.searchEngineData?.decisionsList);
-  const companies = useSelector(state => state.searchEngineData?.companiesList);
-  const dates = useSelector(state => state.searchEngineData?.datesList);
+  const categoryOptions = useSelector(state => state.searchEngineData?.categoriesList);
+  const decisionOptions = useSelector(state => state.searchEngineData?.decisionsList);
+  const companyOptions = useSelector(state => state.searchEngineData?.companiesList);
+  const dateOptions = useSelector(state => state.searchEngineData?.datesList);
+
+  const categoryValue = useSelector(state => state.searchEngineData?.categoryValue);
+  const decisionValue = useSelector(state => state.searchEngineData?.decisionValue);
+  const companyValue = useSelector(state => state.searchEngineData?.companyValue);
+  const dateValue = useSelector(state => state.searchEngineData?.dateValue);
+
+  const selectedCategory = useRef(null);
+  const selectedDecision = useRef(null);
+  const selectedCompany = useRef(null);
+  const selectedDates = useRef(null);
+
+  const handleDropdownSelections = () => {
+    console.log(selectedCategory);
+    dispatch(setCategoryFilter(selectedCategory.current.value));
+    dispatch(setDecisionFilter(selectedDecision.current.value));
+    dispatch(setCompanyFilter(selectedCompany.current.value));
+    dispatch(setSelectedDateFilter(selectedDates.current.value));
+  };
 
   useEffect(() => {
     dispatch(getMockCategoriesList());
@@ -74,22 +92,35 @@ const SearchEngineFilters = () => {
         <Dropdown
           className="category-area"
           placeholder="Category"
-          options={categories}
-          fn={value => setCategoryFilter(value)}
+          options={categoryOptions}
+          ref={selectedCategory}
+          value={categoryValue}
+          onClick={handleDropdownSelections}
         />
         <Dropdown
           className="decision-area"
           placeholder="Decision"
-          options={decisions}
-          fn={value => setDecisionFilter(value)}
+          options={decisionOptions}
+          ref={selectedDecision}
+          value={decisionValue}
+          onClick={handleDropdownSelections}
         />
         <Dropdown
           className="company-area"
           placeholder="Company"
-          options={companies}
-          fn={value => setCompanyFilter(value)}
+          options={companyOptions}
+          ref={selectedCompany}
+          value={companyValue}
+          onClick={handleDropdownSelections}
         />
-        <Dropdown className="date-area" placeholder="Date" options={dates} fn={value => setSelectedDateFilter(value)} />
+        <Dropdown
+          className="date-area"
+          placeholder="Date"
+          options={dateOptions}
+          ref={selectedDates}
+          value={dateValue}
+          onClick={handleDropdownSelections}
+        />
       </S.DropDownFilters>
     </S.SearchEngineFilters>
   );

@@ -1,5 +1,4 @@
-import { useState } from "react";
-import { useDispatch } from "react-redux";
+import { useState, forwardRef, useRef } from "react";
 import PropTypes from "prop-types";
 import * as S from "./styles.js";
 import Button from "../Button";
@@ -25,17 +24,12 @@ const inputButtonVariant = {
   hover: COLOURS.surface.default,
 };
 
-const Dropdown = ({ placeholder, options, fn, ...otherProps }) => {
-  const dispatch = useDispatch();
+const Dropdown = forwardRef(({ placeholder, options, value }, ref) => {
   const [openDropdownList, setOpenDropdownList] = useState(false);
-  const [selectedValue, setSelectedValue] = useState({ text: placeholder, value: null });
+  const [selectedValue, setSelectedValue] = useState(placeholder);
 
-  const handleSelect = e => {
-    const selectedText = e.target.innerText;
-    const selectedValue = options?.find(o => o.text === selectedText).value;
-    setSelectedValue({ text: selectedText, value: selectedValue });
-    setOpenDropdownList(!openDropdownList);
-    dispatch(fn(selectedText));
+  const handleClick = e => {
+    setSelectedValue(e.target.innerText);
   };
 
   return (
@@ -49,7 +43,7 @@ const Dropdown = ({ placeholder, options, fn, ...otherProps }) => {
           size="lg"
           isFullWidth={true}
           isInput={true}>
-          {selectedValue.text}
+          {selectedValue}
         </Button>
         <S.ChevronIconContainer>
           <ChevronIcon variant={subduedText} size="sm" />
@@ -59,15 +53,16 @@ const Dropdown = ({ placeholder, options, fn, ...otherProps }) => {
       <S.DropdownOptionsContainer>
         {openDropdownList && options?.length ? (
           <S.DropdownOptions>
+            <S.SelectedDropdown ref={ref} value={selectedValue} />
             {options.map(({ text }) => (
               <Button
                 type="button"
                 key={text.replace(" ", "")}
-                onClick={handleSelect}
                 variant={inputButtonVariant}
                 textColour={defaultText}
                 isFullWidth={true}
-                isOption={true}>
+                isOption={true}
+                onClick={handleClick}>
                 <Text as="TextBody">{text}</Text>
               </Button>
             ))}
@@ -76,13 +71,14 @@ const Dropdown = ({ placeholder, options, fn, ...otherProps }) => {
       </S.DropdownOptionsContainer>
     </div>
   );
-};
+});
 
 Dropdown.propType = {
   options: PropTypes.arrayOf(
     PropTypes.shape({
       text: PropTypes.string.isRequired,
       value: PropTypes.any.isRequired,
+      ref: PropTypes.oneOfType([PropTypes.func, PropTypes.shape({ current: PropTypes.any })]).isRequired,
     })
   ),
 };
