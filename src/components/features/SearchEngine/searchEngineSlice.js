@@ -15,10 +15,19 @@ const initialState = {
   selectedDecision: null,
   selectedCompany: null,
   selectedDate: null,
-  resultPageSize: 3,
-  sortBy: ["Newest", "Oldest"],
-  results: [],
-  filteredResults: [],
+  resultsPageData: {
+    currentPage: 1,
+    pageSize: 5,
+    pageSizeOptions: [5, 10, 15, 20],
+    lastPageNumber: 4,
+    firstResultIndex: 0,
+    sortBy: [
+      { text: "Newest", value: "1" },
+      { text: "Oldest", value: 2 },
+    ],
+  },
+  searchResults: [],
+  filteredSearchResults: [],
   categoriesList: [],
   decisionsList: [],
   companiesList: [],
@@ -45,19 +54,10 @@ const searchEngineSlice = createSlice({
     setSelectedDateFilter: (state, action) => {
       state.selectedDate = action.payload;
     },
-    incrementPagination: (state, action) => {
-      const totalPageNumbers = state.results.length / state.resultPageSize;
-      const currentPage = state.paginationPageNumber;
-      if (currentPage < totalPageNumbers) state.paginationPageNumber++;
-    },
-    decrementPagination: (state, action) => {
-      const currentPage = state.paginationPageNumber;
-      state.paginationPageNumber = currentPage > 1 ? currentPage - 1 : 1;
-    },
     filterResults: (state, action) => {
       const { searchTerm, selectedCategory, selectedDecision, selectedCompany, selectedDate } = state;
-      state.filteredResults = [...state.results];
-      state.filteredResults = state.filteredResults
+      state.filteredSearchResults = [...state.searchResults];
+      state.filteredSearchResults = state.filteredSearchResults
         .filter(x => (searchTerm ? x.title.toLowerCase().includes(searchTerm.toLowerCase()) : true))
         .filter(x => (selectedCategory ? x.category === selectedCategory : true))
         .filter(x => (selectedDecision ? x.decision === selectedDecision : true))
@@ -70,8 +70,16 @@ const searchEngineSlice = createSlice({
       state.selectedDecision = null;
       state.selectedCompany = null;
       state.selectedDate = null;
-      state.filteredResults = [...state.results];
-      console.log(state.selectedCategory);
+      state.filteredSearchResults = [...state.searchResults];
+    },
+    setResultsPage: (state, action) => {
+      // const filteredSearchResults = state.resultsPageData.filteredSearchResults;
+      // const pageSize = state.resultPageSize; // e.g. show 5 items
+      // const totalResultSize = filteredSearchResults.length; // 20 searchResults
+      // const numberOfPages = totalResultSize / state.resultPageSize; // e.g.   5 / 20 = 4 pages
+      // const currentPage = 1;
+      // const resultIndex = currentPage * pageSize; // e.g. page 4 X 5 searchResults   = last 20 searchResults
+      // // for (let i = 0; i < resultsPageData.filteredSearchResults .length; i++) {}
     },
   },
   extraReducers: builder => {
@@ -81,8 +89,8 @@ const searchEngineSlice = createSlice({
       })
       .addCase(getMockSearchResults.fulfilled, (state, action) => {
         state.isSearchDataLoading = false;
-        state.results = [...action.payload];
-        state.filteredResults = state.results;
+        state.searchResults = [...action.payload];
+        state.filteredSearchResults = [...state.searchResults];
       })
       .addCase(getMockCategoriesList.fulfilled, (state, action) => {
         state.categoriesList = [...action.payload];
@@ -98,6 +106,8 @@ const searchEngineSlice = createSlice({
       });
   },
 });
+
+export const searchResults = state => state.searchEngineData?.filteredSearchResults;
 
 export const {
   setSearchTerm,

@@ -1,5 +1,5 @@
 import { useDispatch } from "react-redux";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 
 import * as S from "./styles.js";
@@ -28,22 +28,13 @@ const inputButtonVariant = {
 
 const Dropdown = ({ placeholder, options, value, updateState }) => {
   const [openDropdownList, setOpenDropdownList] = useState(false);
-  const [selectedValue, setSelectedValue] = useState(placeholder);
+
   const dispatch = useDispatch();
 
   const handleClick = e => {
     setOpenDropdownList(!openDropdownList);
-    setSelectedValue(e.target.innerText);
+    dispatch(updateState(e.target.innerText));
   };
-
-  useEffect(() => {
-    if (selectedValue) {
-      dispatch(updateState(selectedValue));
-    }
-    if (!value) {
-      setSelectedValue(placeholder);
-    }
-  }, [selectedValue, dispatch, placeholder, updateState, value]);
 
   return (
     <div>
@@ -56,7 +47,7 @@ const Dropdown = ({ placeholder, options, value, updateState }) => {
           size="lg"
           isFullWidth={true}
           isInput={true}>
-          {selectedValue}
+          {value ? value : placeholder}
         </Button>
         <S.ChevronIconContainer>
           <ChevronIcon variant={subduedText} size="sm" />
