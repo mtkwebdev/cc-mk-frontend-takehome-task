@@ -12,7 +12,7 @@ const iconSize = {
   xs: "1.25rem",
 };
 
-const BaseSVG = memo(({ size, children, ...otherProps }) => {
+const BaseSVG = memo(({ size, variant, children }) => {
   return (
     <S.BaseSVG
       width={iconSize[size]}
@@ -21,7 +21,7 @@ const BaseSVG = memo(({ size, children, ...otherProps }) => {
       fill="none"
       focusable="true"
       xmlns="http://www.w3.org/2000/svg"
-      {...otherProps}>
+      variant={variant}>
       {children}
     </S.BaseSVG>
   );
