@@ -80,24 +80,26 @@ const searchEngineSlice = createSlice({
     },
     setCurrentSearchResultPage: (state, action) => {
       setCurrentSearchPageHelper(state);
-      setCurrentSearchPageHelper(state);
     },
     setCurrentPage: (state, action) => {
-      console.log(action.payload);
       state.pagination.page = action.payload;
+      setCurrentSearchPageHelper(state);
     },
     setSearchResultPageSize: (state, actions) => {
       state.pagination.pageSize = actions.payload;
+      state.pagination.page = 1;
       setCurrentSearchPageHelper(state);
     },
     incrementPagination: (state, action) => {
       const page = state.pagination.page;
       const lastPage = state.pagination.totalPages;
       if (page < lastPage) state.pagination.page += 1;
+      setCurrentSearchPageHelper(state);
     },
     decrementPagination: (state, action) => {
       const page = state.pagination.page;
       state.pagination.page = page > 1 ? page - 1 : 1;
+      setCurrentSearchPageHelper(state);
     },
     setSearchResultSortOrder: (state, action) => {
       state.pagination.sortBy = action.payload;

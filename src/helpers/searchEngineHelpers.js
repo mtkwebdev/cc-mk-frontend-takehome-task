@@ -29,7 +29,7 @@ export const setCurrentSearchPageHelper = state => {
   // page result starts from i and ends with ii
   const i = state.pagination.firstResultArrIndex;
   const ii = state.pagination.totalPageItems;
-  state.pagination.firstResultIndex = i + 1;
+  state.pagination.firstResultIndex = i || 1;
   state.pagination.lastResultIndex = ii;
   state.filteredSearchResults = arr.splice(i, ii);
 };
