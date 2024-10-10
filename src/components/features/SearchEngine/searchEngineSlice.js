@@ -28,7 +28,7 @@ const initialState = {
       { text: "10", value: 10 },
       { text: "20", value: 20 },
     ],
-    sortBy: { text: "Sort By", value: 0 },
+    sortBy: { text: "Sort By", value: 5 },
   },
   searchResultsCount: 0,
   searchResults: [],
@@ -77,10 +77,11 @@ const searchEngineSlice = createSlice({
     },
     setCurrentSearchResultPage: (state, action) => {
       setCurrentSearchPageHelper(state);
+      setCurrentSearchPageHelper(state);
     },
     setCurrentPage: (state, action) => {
+      console.log(action.payload);
       state.pagination.page = action.payload;
-      setCurrentSearchPageHelper(state);
     },
     setSearchResultPageSize: (state, actions) => {
       state.pagination.pageSize = actions.payload;

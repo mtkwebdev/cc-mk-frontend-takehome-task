@@ -1,22 +1,25 @@
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import PropTypes from "prop-types";
+
+import ChevronIcon from "../../icons/ChevronIcon";
+
 import * as S from "./styles";
 
 import {
   incrementPagination,
   decrementPagination,
-  setSearchResultPageSize,
+  setCurrentSearchResultPage,
   setCurrentPage,
 } from "../../features/SearchEngine/searchEngineSlice.js";
 const Pagination = () => {
   const dispatch = useDispatch();
 
-  const numberOfPages = useSelector(state => state.searchEngineData?.pagination.totalPages) || 10;
+  const numberOfPages = useSelector(state => state.searchEngineData?.pagination.totalPages);
+  console.log(numberOfPages);
 
   useEffect(() => {
-    dispatch(setSearchResultPageSize({ text: "5", value: 5 }));
-  }, [dispatch]);
+    dispatch(setCurrentSearchResultPage());
+  });
 
   const handleNextPage = () => {
     dispatch(incrementPagination());
@@ -25,28 +28,31 @@ const Pagination = () => {
     dispatch(decrementPagination());
   };
   const handleSetCurrentPage = e => {
-    setCurrentPage(parseInt(e.target.value));
+    console.log(parseInt(e.target.innerText));
+    dispatch(setCurrentPage(parseInt(e.target.innerText)));
   };
 
   const pageButtons = () => {
-    for (let i = 0; i < 4; i) {
-      return (
-        <button type="button" onClick={e => handleSetCurrentPage(e)}>
-          {i}
-        </button>
-      );
-    }
+    const pages = Array.from(Array(numberOfPages).keys());
+    return (
+      <>
+        {pages?.map(pageNumber => (
+          <S.PageButton type="button" onClick={e => handleSetCurrentPage(e)} key={`pagination-btn-${pageNumber}`}>
+            {pageNumber + 1}
+          </S.PageButton>
+        ))}
+      </>
+    );
   };
 
   return (
     <S.PaginationContainer>
-      <S.PreviousButton type="button" onClick={handlePreviousPage}>
-        Previous
+      <S.PreviousButton className="paginator-btn" type="button" onClick={handlePreviousPage}>
+        <ChevronIcon size="lg" />
       </S.PreviousButton>
       {pageButtons()}
-
-      <S.NextButton type="button" onClick={handleNextPage}>
-        Next
+      <S.NextButton className="paginator-btn" type="button" onClick={handleNextPage}>
+        <ChevronIcon size="lg" />
       </S.NextButton>
     </S.PaginationContainer>
   );

@@ -31,7 +31,6 @@ const BaseSVG = memo(({ size, variant, children }) => {
 BaseSVG.propTypes = {
   size: PropTypes.string,
   children: PropTypes.node,
-  variant: PropTypes.object.isRequired,
 };
 
 export default BaseSVG;

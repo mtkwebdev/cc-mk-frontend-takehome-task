@@ -18,7 +18,6 @@ const ChevronIcon = memo(({ ...props }) => {
 // Prop validators
 ChevronIcon.propTypes = {
   size: PropTypes.string,
-  variant: PropTypes.object.isRequired,
 };
 
 export default ChevronIcon;
