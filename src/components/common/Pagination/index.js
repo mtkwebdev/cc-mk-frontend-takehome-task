@@ -15,7 +15,6 @@ const Pagination = () => {
   const dispatch = useDispatch();
 
   const numberOfPages = useSelector(state => state.searchEngineData?.pagination.totalPages);
-  console.log(numberOfPages);
 
   useEffect(() => {
     dispatch(setCurrentSearchResultPage());
@@ -28,7 +27,6 @@ const Pagination = () => {
     dispatch(decrementPagination());
   };
   const handleSetCurrentPage = e => {
-    console.log(parseInt(e.target.innerText));
     dispatch(setCurrentPage(parseInt(e.target.innerText)));
   };
 
